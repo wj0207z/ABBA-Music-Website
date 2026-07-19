@@ -1,0 +1,581 @@
+@import url("https://fonts.cdnfonts.com/css/lulo-clean");
+@import url("https://fonts.googleapis.com/css?family=Fraunces");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #000;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Navigation */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    width: 100%;
+    padding: 1px;
+
+    background-color: #101010;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 13.5px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.nav-links li {
+    padding: 5px 70px;
+}
+
+.nav-links li a {
+    position: relative;
+    color: #cfb6bc;
+}
+
+.nav-links li a::after {
+    content: "";
+
+    display: block;
+    width: 0;
+    height: 3px;
+    margin: 6px auto 0;
+
+    background-color: white;
+    transition: width 0.15s linear;
+}
+
+.nav-links li a:hover {
+    color: white;
+}
+
+.nav-links li a:hover::after {
+    width: 100%;
+}
+
+.homeIcon img {
+    display: block;
+    width: 70px;
+    height: 70px;
+    margin-top: -5px;
+}
+
+/* Home page */
+
+.home-page {
+    min-height: 100vh;
+    padding-top: 74px;
+    background-color: #000;
+}
+
+.hero-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 50px;
+
+    min-height: 620px;
+    padding: 70px 8vw;
+
+    background-color: #000;
+}
+
+.hero-text {
+    max-width: 560px;
+}
+
+.eyebrow {
+    margin: 0 0 15px;
+
+    color: #cfb6bc;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.hero-text h1 {
+    margin: 0;
+
+    color: #cfb6bc;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 90px;
+    letter-spacing: 12px;
+}
+
+.hero-text > p:not(.eyebrow) {
+    max-width: 500px;
+
+    color: white;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 22px;
+    line-height: 1.6;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 30px;
+}
+
+.primary-button,
+.secondary-button {
+    padding: 13px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.primary-button {
+    background-color: #cfb6bc;
+    color: #101010;
+}
+
+.secondary-button {
+    border: 1px solid #cfb6bc;
+    color: #cfb6bc;
+}
+
+.primary-button:hover,
+.secondary-button:hover {
+    background-color: white;
+    color: #101010;
+}
+
+.hero-image {
+    height: 440px;
+    overflow: hidden;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Content sections */
+
+.home-section {
+    padding: 80px 8vw;
+    background-color: #000;
+}
+
+.section-heading {
+    margin-bottom: 30px;
+}
+
+.section-heading h2 {
+    margin: 0;
+
+    color: #cfb6bc;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 42px;
+    letter-spacing: 4px;
+}
+
+/* Feature cards */
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.feature-card {
+    display: flex;
+    align-items: end;
+
+    min-height: 360px;
+
+    background-position: center;
+    background-size: cover;
+}
+
+.feature-overlay {
+    width: 100%;
+    padding: 25px;
+
+    color: white;
+    background: linear-gradient(
+        transparent,
+        rgba(0, 0, 0, 0.95)
+    );
+}
+
+.feature-overlay h3 {
+    margin: 0 0 8px;
+
+    color: #cfb6bc;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 19px;
+    letter-spacing: 2px;
+}
+
+.feature-overlay p {
+    margin: 0;
+    color: white;
+}
+
+/* Events */
+
+.events-section {
+    background-color: #101010;
+}
+
+.event-list {
+    max-width: 950px;
+}
+
+.event-row {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 25px;
+
+    padding: 22px 0;
+    border-bottom: 1px solid #333;
+}
+
+.event-date {
+    width: 65px;
+    padding: 10px;
+
+    border: 1px solid #cfb6bc;
+    color: #cfb6bc;
+    text-align: center;
+}
+
+.event-date strong,
+.event-date span {
+    display: block;
+}
+
+.event-date strong {
+    font-size: 25px;
+}
+
+.event-date span {
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.event-row h3 {
+    margin: 0 0 6px;
+    color: white;
+}
+
+.event-row p {
+    margin: 0;
+    color: #cfb6bc;
+}
+
+.event-button {
+    padding: 10px 16px;
+
+    border: 1px solid #cfb6bc;
+    background-color: transparent;
+    color: #cfb6bc;
+}
+
+.event-button:hover {
+    background-color: #cfb6bc;
+    color: #101010;
+}
+
+/* Temporary pages */
+
+.page-title {
+    min-height: 100vh;
+    margin: 0;
+    padding: 180px 8vw;
+
+    background-color: #000;
+    color: #cfb6bc;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 50px;
+}
+
+/* Mobile layout */
+
+@media (max-width: 800px) {
+    .navbar {
+        position: relative;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 10px;
+    }
+
+    .nav-links li {
+        padding: 5px 8px;
+    }
+
+    .homeIcon {
+        order: -1;
+        width: 100%;
+        text-align: center;
+    }
+
+    .homeIcon img {
+        margin: 0 auto;
+    }
+
+    .home-page {
+        padding-top: 0;
+    }
+
+    .hero-section {
+        grid-template-columns: 1fr;
+        padding: 60px 25px;
+    }
+
+    .hero-text h1 {
+        font-size: 58px;
+        letter-spacing: 7px;
+    }
+
+    .hero-text > p:not(.eyebrow) {
+        font-size: 18px;
+    }
+
+    .hero-image {
+        height: 300px;
+    }
+
+    .home-section {
+        padding: 60px 25px;
+    }
+
+    .section-heading h2 {
+        font-size: 28px;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .event-row {
+        grid-template-columns: 65px 1fr;
+    }
+
+    .event-button {
+        grid-column: 2;
+        justify-self: start;
+    }
+}
+
+.hero-section {
+    min-height: 700px;
+    text-align: center;
+}
+
+.hero-text {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.hero-text > p:not(.eyebrow) {
+    margin: 25px auto;
+    font-size: 25px;
+}
+
+.hero-actions {
+    justify-content: center;
+}
+
+.hero-image {
+    max-width: 850px;
+    width: 100%;
+    height: 500px;
+    margin: 0 auto;
+}
+
+/* Center the sections below */
+
+.home-section {
+    text-align: center;
+}
+
+.section-heading {
+    max-width: 900px;
+    margin: 0 auto 40px;
+}
+
+.section-heading h2 {
+    font-size: 50px;
+}
+
+.feature-grid {
+    max-width: 1250px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.feature-card {
+    min-height: 430px;
+}
+
+.event-list {
+    max-width: 950px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(260px, 360px));
+    justify-content: center;
+    gap: 24px;
+
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    width: 100%;
+    min-height: 430px;
+}
+
+.albums-page {
+    min-height: 100vh;
+    padding: 160px 8vw 100px;
+    background-color: #000;
+}
+
+.albums-heading {
+    max-width: 700px;
+    margin: 0 auto 55px;
+    text-align: center;
+}
+
+.albums-heading h1 {
+    margin: 0;
+
+    color: #cfb6bc;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 65px;
+    letter-spacing: 6px;
+}
+
+.albums-heading > p:not(.eyebrow) {
+    color: white;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+.album-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(220px, 300px));
+    justify-content: center;
+    gap: 30px;
+}
+
+.album-card {
+    overflow: hidden;
+    border: 1px solid #333;
+    background-color: #101010;
+}
+
+.album-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.album-card-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.album-card-content h2 {
+    margin: 0 0 8px;
+
+    color: #cfb6bc;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+.album-card-content p {
+    margin: 0 0 18px;
+    color: white;
+}
+
+.album-card-content a {
+    display: inline-block;
+    padding: 10px 15px;
+
+    border: 1px solid #cfb6bc;
+    color: #cfb6bc;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.album-card-content a:hover {
+    background-color: #cfb6bc;
+    color: #101010;
+}
+
+@media (max-width: 800px) {
+    .hero-section {
+        min-height: auto;
+        text-align: center;
+    }
+
+    .hero-text h1 {
+        font-size: 58px;
+    }
+
+    .hero-image {
+        height: 320px;
+    }
+
+    .section-heading h2 {
+        font-size: 32px;
+    }
+
+    .feature-card {
+        min-height: 360px;
+    }
+
+    .feature-grid {
+        grid-template-columns: minmax(260px, 420px);
+    }
+
+    .albums-page {
+        padding: 100px 25px 70px;
+    }
+
+    .albums-heading h1 {
+        font-size: 45px;
+    }
+
+    .album-grid {
+        grid-template-columns: minmax(220px, 360px);
+    }
+}
+
