@@ -8,12 +8,17 @@
 body {
     margin: 0;
     background: #000;
-    color: white;
+    color: #fff;
     font-family: Arial, sans-serif;
 }
 
 a {
     text-decoration: none;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
 }
 
 /* Navigation */
@@ -62,12 +67,12 @@ a {
     height: 3px;
     margin: 6px auto 0;
 
-    background-color: white;
+    background-color: #fff;
     transition: width 0.15s linear;
 }
 
 .nav-links li a:hover {
-    color: white;
+    color: #fff;
 }
 
 .nav-links li a:hover::after {
@@ -81,7 +86,7 @@ a {
     margin-top: -5px;
 }
 
-/* Home page */
+/* Home */
 
 .home-page {
     min-height: 100vh;
@@ -95,14 +100,16 @@ a {
     align-items: center;
     gap: 50px;
 
-    min-height: 620px;
+    min-height: 700px;
     padding: 70px 8vw;
 
     background-color: #000;
+    text-align: center;
 }
 
 .hero-text {
-    max-width: 560px;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 .eyebrow {
@@ -126,15 +133,17 @@ a {
 
 .hero-text > p:not(.eyebrow) {
     max-width: 500px;
+    margin: 25px auto;
 
-    color: white;
+    color: #fff;
     font-family: "Fraunces", Georgia, serif;
-    font-size: 22px;
+    font-size: 25px;
     line-height: 1.6;
 }
 
 .hero-actions {
     display: flex;
+    justify-content: center;
     gap: 14px;
     margin-top: 30px;
 }
@@ -158,12 +167,15 @@ a {
 
 .primary-button:hover,
 .secondary-button:hover {
-    background-color: white;
+    background-color: #fff;
     color: #101010;
 }
 
 .hero-image {
-    height: 440px;
+    width: 100%;
+    max-width: 850px;
+    height: 500px;
+    margin: 0 auto;
     overflow: hidden;
 }
 
@@ -173,15 +185,17 @@ a {
     object-fit: cover;
 }
 
-/* Content sections */
+/* Home sections */
 
 .home-section {
     padding: 80px 8vw;
     background-color: #000;
+    text-align: center;
 }
 
 .section-heading {
-    margin-bottom: 30px;
+    max-width: 900px;
+    margin: 0 auto 40px;
 }
 
 .section-heading h2 {
@@ -189,23 +203,27 @@ a {
 
     color: #cfb6bc;
     font-family: "Lulo Clean One", sans-serif;
-    font-size: 42px;
+    font-size: 50px;
     letter-spacing: 4px;
 }
 
-/* Feature cards */
-
 .feature-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
+    grid-template-columns: repeat(3, minmax(260px, 360px));
+    justify-content: center;
+    gap: 24px;
+
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
 }
 
 .feature-card {
     display: flex;
     align-items: end;
 
-    min-height: 360px;
+    width: 100%;
+    min-height: 430px;
 
     background-position: center;
     background-size: cover;
@@ -215,7 +233,7 @@ a {
     width: 100%;
     padding: 25px;
 
-    color: white;
+    color: #fff;
     background: linear-gradient(
         transparent,
         rgba(0, 0, 0, 0.95)
@@ -233,7 +251,7 @@ a {
 
 .feature-overlay p {
     margin: 0;
-    color: white;
+    color: #fff;
 }
 
 /* Events */
@@ -244,6 +262,8 @@ a {
 
 .event-list {
     max-width: 950px;
+    margin: 0 auto;
+    text-align: left;
 }
 
 .event-row {
@@ -281,7 +301,7 @@ a {
 
 .event-row h3 {
     margin: 0 0 6px;
-    color: white;
+    color: #fff;
 }
 
 .event-row p {
@@ -302,161 +322,7 @@ a {
     color: #101010;
 }
 
-/* Temporary pages */
-
-.page-title {
-    min-height: 100vh;
-    margin: 0;
-    padding: 180px 8vw;
-
-    background-color: #000;
-    color: #cfb6bc;
-    font-family: "Lulo Clean One", sans-serif;
-    font-size: 50px;
-}
-
-/* Mobile layout */
-
-@media (max-width: 800px) {
-    .navbar {
-        position: relative;
-    }
-
-    .nav-links {
-        flex-wrap: wrap;
-        gap: 12px;
-        padding: 10px;
-    }
-
-    .nav-links li {
-        padding: 5px 8px;
-    }
-
-    .homeIcon {
-        order: -1;
-        width: 100%;
-        text-align: center;
-    }
-
-    .homeIcon img {
-        margin: 0 auto;
-    }
-
-    .home-page {
-        padding-top: 0;
-    }
-
-    .hero-section {
-        grid-template-columns: 1fr;
-        padding: 60px 25px;
-    }
-
-    .hero-text h1 {
-        font-size: 58px;
-        letter-spacing: 7px;
-    }
-
-    .hero-text > p:not(.eyebrow) {
-        font-size: 18px;
-    }
-
-    .hero-image {
-        height: 300px;
-    }
-
-    .home-section {
-        padding: 60px 25px;
-    }
-
-    .section-heading h2 {
-        font-size: 28px;
-    }
-
-    .feature-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .event-row {
-        grid-template-columns: 65px 1fr;
-    }
-
-    .event-button {
-        grid-column: 2;
-        justify-self: start;
-    }
-}
-
-.hero-section {
-    min-height: 700px;
-    text-align: center;
-}
-
-.hero-text {
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.hero-text > p:not(.eyebrow) {
-    margin: 25px auto;
-    font-size: 25px;
-}
-
-.hero-actions {
-    justify-content: center;
-}
-
-.hero-image {
-    max-width: 850px;
-    width: 100%;
-    height: 500px;
-    margin: 0 auto;
-}
-
-/* Center the sections below */
-
-.home-section {
-    text-align: center;
-}
-
-.section-heading {
-    max-width: 900px;
-    margin: 0 auto 40px;
-}
-
-.section-heading h2 {
-    font-size: 50px;
-}
-
-.feature-grid {
-    max-width: 1250px;
-    margin: 0 auto;
-    text-align: left;
-}
-
-.feature-card {
-    min-height: 430px;
-}
-
-.event-list {
-    max-width: 950px;
-    margin: 0 auto;
-    text-align: left;
-}
-
-.feature-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(260px, 360px));
-    justify-content: center;
-    gap: 24px;
-
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.feature-card {
-    width: 100%;
-    min-height: 430px;
-}
+/* Albums */
 
 .albums-page {
     min-height: 100vh;
@@ -470,7 +336,9 @@ a {
     text-align: center;
 }
 
-.albums-heading h1 {
+.albums-heading h1,
+.gallery-heading h1,
+.community-heading h1 {
     margin: 0;
 
     color: #cfb6bc;
@@ -479,8 +347,10 @@ a {
     letter-spacing: 6px;
 }
 
-.albums-heading > p:not(.eyebrow) {
-    color: white;
+.albums-heading > p:not(.eyebrow),
+.gallery-heading > p:not(.eyebrow),
+.community-heading > p:not(.eyebrow) {
+    color: #fff;
     font-family: "Fraunces", Georgia, serif;
     font-size: 20px;
     line-height: 1.6;
@@ -522,7 +392,7 @@ a {
 
 .album-card-content p {
     margin: 0 0 18px;
-    color: white;
+    color: #fff;
 }
 
 .album-card-content a {
@@ -540,75 +410,68 @@ a {
     color: #101010;
 }
 
-.gallery-page {
+/* Album detail */
+
+.album-detail-page {
     min-height: 100vh;
-    padding: 160px 0 100px;
+    padding: 150px 8vw 100px;
     background-color: #000;
 }
 
-.gallery-heading {
-    max-width: 750px;
-    margin: 0 auto 55px;
-    padding: 0 25px;
-    text-align: center;
+.back-link {
+    color: #cfb6bc;
+    font-weight: bold;
 }
 
-.gallery-heading h1 {
+.album-detail {
+    display: grid;
+    grid-template-columns: minmax(280px, 480px) 1fr;
+    align-items: center;
+    gap: 70px;
+
+    max-width: 1000px;
+    margin: 70px auto 0;
+}
+
+.album-detail > img {
+    width: 100%;
+    border: 1px solid #333;
+}
+
+.album-detail-content h1 {
     margin: 0;
 
     color: #cfb6bc;
     font-family: "Lulo Clean One", sans-serif;
-    font-size: 65px;
-    letter-spacing: 6px;
+    font-size: 60px;
+    letter-spacing: 4px;
 }
 
-.gallery-heading > p:not(.eyebrow) {
-    color: white;
+.album-year {
+    color: #cfb6bc;
+    font-size: 20px;
+}
+
+.album-description {
+    max-width: 500px;
+
+    color: #fff;
     font-family: "Fraunces", Georgia, serif;
     font-size: 20px;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
-/* The visible window */
+.play-button {
+    width: 38px;
+    height: 38px;
 
-.gallery-scroll-container {
-    width: 100%;
-    overflow-x: auto;
-    padding: 10px 0 25px;
-
-    scrollbar-color: #cfb6bc #101010;
-    scrollbar-width: thin;
+    border: 0;
+    border-radius: 50%;
+    background-color: #cfb6bc;
+    color: #101010;
 }
 
-/* The long row inside the window */
-
-.gallery-row {
-    display: flex;
-    gap: 12px;
-    width: max-content;
-    padding: 0 25px;
-}
-
-/* Individual images */
-
-.gallery-card {
-    flex: 0 0 330px;
-    height: 420px;
-    overflow: hidden;
-    background-color: #101010;
-}
-
-.gallery-card img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.gallery-card:hover img {
-    transform: scale(1.05);
-}
+/* Gallery collage */
 
 .gallery-page {
     min-height: 100vh;
@@ -680,7 +543,8 @@ a {
     height: 345px;
 }
 
-.img67 {
+.img67,
+.img89 {
     display: flex;
     gap: 8px;
 }
@@ -693,11 +557,6 @@ a {
 .img7 img {
     width: 363px;
     height: 225px;
-}
-
-.img89 {
-    display: flex;
-    gap: 8px;
 }
 
 .img8 img {
@@ -715,25 +574,26 @@ a {
     height: 345px;
 }
 
-.img11 img {
-    width: 405px;
-    height: 285px;
-}
-
+.img11 img,
 .img12 img {
     width: 405px;
     height: 285px;
 }
 
-.img13 img {
+.img13 img,
+.img14 img {
     width: 375px;
+}
+
+.img13 img {
     height: 255px;
 }
 
 .img14 img {
-    width: 375px;
     height: 315px;
 }
+
+/* Community */
 
 .community-page {
     min-height: 100vh;
@@ -747,21 +607,6 @@ a {
     text-align: center;
 }
 
-.community-heading h1 {
-    margin: 0;
-
-    color: #cfb6bc;
-    font-family: "Lulo Clean One", sans-serif;
-    font-size: 60px;
-    letter-spacing: 5px;
-}
-
-.community-heading > p:not(.eyebrow) {
-    color: white;
-    font-family: "Fraunces", Georgia, serif;
-    font-size: 20px;
-}
-
 .community-layout {
     display: grid;
     grid-template-columns: 280px minmax(400px, 700px);
@@ -769,21 +614,20 @@ a {
     gap: 25px;
 }
 
-.profile-card,
-.community-post {
-    padding: 24px;
-    background-color: #101010;
-    border: 1px solid #333;
-}
-
 .profile-card {
     height: fit-content;
+    padding: 24px;
+
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #101010;
     text-align: center;
 }
 
 .profile-avatar {
     width: 80px;
     height: 80px;
+
     display: grid;
     place-items: center;
     margin: 0 auto 18px;
@@ -797,12 +641,12 @@ a {
 
 .profile-card h2 {
     margin: 0 0 6px;
-    color: #cfb6bc;
+    color: #101010;
 }
 
 .username {
     margin: 0;
-    color: #999;
+    color: #777;
 }
 
 .profile-stats {
@@ -817,36 +661,49 @@ a {
 }
 
 .profile-stats strong {
-    color: #cfb6bc;
+    color: #9f777f;
     font-size: 20px;
 }
 
 .profile-stats span {
     margin-top: 5px;
-    color: white;
+    color: #101010;
     font-size: 11px;
 }
 
 .profile-button {
     padding: 10px 15px;
-    border: 1px solid #cfb6bc;
+    border: 1px solid #9f777f;
     background-color: transparent;
-    color: #cfb6bc;
+    color: #9f777f;
 }
 
 .profile-button:hover {
-    background-color: #cfb6bc;
-    color: #101010;
+    background-color: #9f777f;
+    color: #fff;
+}
+
+.post-list {
+    padding: 25px;
+    background-color: #fff;
 }
 
 .community-post {
-    margin-bottom: 18px;
+    margin-bottom: 20px;
+    padding: 24px;
+
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #101010;
 }
 
 .post-header {
     display: flex;
     justify-content: space-between;
-    color: #cfb6bc;
+}
+
+.post-header strong {
+    color: #101010;
 }
 
 .post-header span {
@@ -855,7 +712,7 @@ a {
 }
 
 .community-post > p {
-    color: white;
+    color: #101010;
     font-family: "Fraunces", Georgia, serif;
     font-size: 18px;
     line-height: 1.6;
@@ -866,14 +723,16 @@ a {
     align-items: center;
     gap: 15px;
     padding: 14px;
-    background-color: #000;
+    background-color: #f3f3f3;
 }
 
 .song-cover {
     width: 48px;
     height: 48px;
+
     display: grid;
     place-items: center;
+
     background-color: #cfb6bc;
     color: #101010;
 }
@@ -888,22 +747,13 @@ a {
 }
 
 .song-preview strong {
-    color: #cfb6bc;
+    color: #101010;
 }
 
 .song-preview span {
     margin-top: 5px;
-    color: #999;
+    color: #777;
     font-size: 12px;
-}
-
-.play-button {
-    width: 38px;
-    height: 38px;
-    border: 0;
-    border-radius: 50%;
-    background-color: #cfb6bc;
-    color: #101010;
 }
 
 .post-actions {
@@ -915,41 +765,107 @@ a {
 .post-actions button {
     border: 0;
     background-color: transparent;
-    color: #cfb6bc;
+    color: #9f777f;
 }
 
+.post-actions button:hover {
+    color: #101010;
+}
+
+/* Temporary pages */
+
+.page-title {
+    min-height: 100vh;
+    margin: 0;
+    padding: 180px 8vw;
+
+    background-color: #000;
+    color: #cfb6bc;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 50px;
+}
+
+.api-status {
+    margin: 30px 0;
+    color: #cfb6bc;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Responsive */
 
 @media (max-width: 800px) {
-    .hero-section {
-        min-height: auto;
+    .navbar {
+        position: relative;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 10px;
+    }
+
+    .nav-links li {
+        padding: 5px 8px;
+    }
+
+    .homeIcon {
+        order: -1;
+        width: 100%;
         text-align: center;
+    }
+
+    .homeIcon img {
+        margin: 0 auto;
+    }
+
+    .hero-section {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding: 60px 25px;
     }
 
     .hero-text h1 {
         font-size: 58px;
+        letter-spacing: 7px;
+    }
+
+    .hero-text > p:not(.eyebrow) {
+        font-size: 18px;
     }
 
     .hero-image {
         height: 320px;
     }
 
-    .section-heading h2 {
-        font-size: 32px;
+    .home-section {
+        padding: 60px 25px;
     }
 
-    .feature-card {
-        min-height: 360px;
+    .section-heading h2 {
+        font-size: 32px;
     }
 
     .feature-grid {
         grid-template-columns: minmax(260px, 420px);
     }
 
+    .event-row {
+        grid-template-columns: 65px 1fr;
+    }
+
+    .event-button {
+        grid-column: 2;
+        justify-self: start;
+    }
+
     .albums-page {
         padding: 100px 25px 70px;
     }
 
-    .albums-heading h1 {
+    .albums-heading h1,
+    .gallery-heading h1,
+    .community-heading h1 {
         font-size: 45px;
     }
 
@@ -957,16 +873,33 @@ a {
         grid-template-columns: minmax(220px, 360px);
     }
 
-    .community-page {
+    .album-detail-page {
         padding: 110px 25px 70px;
     }
 
-    .community-heading h1 {
-        font-size: 42px;
+    .album-detail {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .album-detail-content h1 {
+        font-size: 40px;
+    }
+
+    .gallery-page > h1 {
+        margin-left: 25px;
+        font-size: 50px;
+    }
+
+    .community-page {
+        padding: 110px 25px 70px;
     }
 
     .community-layout {
         grid-template-columns: 1fr;
     }
-}
 
+    .post-list {
+        padding: 15px;
+    }
+}

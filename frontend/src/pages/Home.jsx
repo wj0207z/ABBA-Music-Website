@@ -1,4 +1,24 @@
+import { useEffect, useState } from "react";
+import api from "../api/axios";
+
 function Home() {
+
+    const [apiStatus, setApiStatus] = useState("Checking API...");
+
+    useEffect(() => {
+        async function checkApi() {
+            try {
+                const response = await api.get("/health");
+
+                setApiStatus(response.data.message);
+            } catch (error) {
+                setApiStatus("Backend connection failed.");
+            }
+        }
+
+        checkApi();
+    }, []);
+    
     return (
         <main className="home-page">
             <section className="hero-section">
@@ -25,7 +45,7 @@ function Home() {
 
                 <div className="hero-image">
                     <img
-                        src="images/Home/ABBAwallpapers.jpeg"
+                        src="/images/Home/ABBAwallpapers.jpeg"
                         alt="ABBA band"
                     />
                 </div>
@@ -42,7 +62,7 @@ function Home() {
                         className="feature-card feature-card-one"
                         style={{
                             backgroundImage:
-                                "url('images/Home/s-l1200.jpg')",
+                                "url('/images/Home/s-l1200.jpg')",
                         }}
                     >
                         <div className="feature-overlay">
@@ -55,7 +75,7 @@ function Home() {
                         className="feature-card feature-card-two"
                         style={{
                             backgroundImage:
-                                "url('images/Home/ABBAfever.jpeg')",
+                                "url('/images/Home/ABBAfever.jpeg')",
                         }}
                     >
                         <div className="feature-overlay">
@@ -78,6 +98,10 @@ function Home() {
                     </article>
                 </div>
             </section>
+
+            <p className="api-status">
+                {apiStatus}
+            </p>
 
             <section className="home-section events-section">
                 <div className="section-heading">
