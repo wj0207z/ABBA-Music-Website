@@ -1,4 +1,42 @@
+import { useState } from "react";
+
+
 function Community() {
+
+    const [liked, setLiked] = useState(false);
+    const [likeCount, setLikeCount] = useState(74);
+
+    const [postText, setPostText] = useState("");
+    const [posts, setPosts] = useState([]);
+
+    function handleLike() {
+        if (liked) {
+            setLikeCount(likeCount - 1);
+        } else {
+            setLikeCount(likeCount + 1);
+        }
+    
+        setLiked(!liked);
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+    
+        if (postText.trim() === "") {
+            return;
+        }
+    
+        const newPost = {
+            id: Date.now(),
+            author: "You",
+            content: postText,
+            createdAt: "Just now",
+        };
+    
+        setPosts([newPost, ...posts]);
+        setPostText("");
+    }
+
     return (
         <main className="community-page">
             <section className="community-heading">
@@ -41,8 +79,38 @@ function Community() {
                     </button>
                 </aside>
 
+                <form className="post-form" onSubmit={handleSubmit}>
+                    <textarea
+                        value={postText}
+                        onChange={(event) => setPostText(event.target.value)}
+                        placeholder="Share something about ABBA..."
+                    />
+
+                    <button type="submit">
+                        Post
+                    </button>
+                </form>
+
                 <section className="post-list">
-                    <article className="community-post">
+                    {posts.map((post) => (
+                        <article className="community-post" key={post.id}>
+                            <div className="post-header">
+                                <strong>{post.author}</strong>
+                                <span>{post.createdAt}</span>
+                            </div>
+
+                            <p>{post.content}</p>
+
+                            <div className="post-actions">
+                                <button>♡ 0</button>
+                                <button>◇ 0</button>
+                                <button>Comment</button>
+                            </div>
+                        </article>
+                        
+                    ))}
+                    
+                        <article className="community-post">
                         <div className="post-header">
                             <strong>Elena Starling</strong>
                             <span>2 hours ago</span>
@@ -67,8 +135,12 @@ function Community() {
                         </div>
 
                         <div className="post-actions">
-                            <button>♡ 74</button>
-                            <button>◇ 24</button>
+                            <button
+                                className={liked ? "post-action liked" : "post-action"}
+                                onClick={handleLike}
+                            >
+                                {liked ? "♥" : "♡"} {likeCount}
+                            </button>                            <button>◇ 24</button>
                             <button>Comment</button>
                         </div>
                     </article>

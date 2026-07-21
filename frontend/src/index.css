@@ -792,6 +792,206 @@ button {
     text-align: center;
 }
 
+.album-detail-page {
+    min-height: 100vh;
+    padding: 150px 8% 80px;
+    background: #000;
+    color: #fff;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 40px;
+    color: #cfb6bc;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.back-link:hover {
+    color: #fff;
+}
+
+.album-detail {
+    display: grid;
+    grid-template-columns: minmax(280px, 440px) 1fr;
+    gap: 70px;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.album-detail-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #171717;
+}
+
+.album-detail-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.album-detail-content {
+    max-width: 600px;
+}
+
+.album-detail-content .eyebrow {
+    margin-bottom: 18px;
+    color: #cfb6bc;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.album-detail-content h1 {
+    margin: 0;
+    color: #cfb6bc;
+    font-size: clamp(42px, 7vw, 88px);
+    line-height: 0.95;
+    letter-spacing: 2px;
+}
+
+.album-year {
+    margin: 24px 0;
+    color: #cfb6bc;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.album-detail-content > p:not(.eyebrow):not(.album-year) {
+    max-width: 520px;
+    color: #d7d7d7;
+    font-size: 17px;
+    line-height: 1.8;
+}
+
+.album-detail-content h2 {
+    margin: 42px 0 16px;
+    color: #cfb6bc;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+.album-detail-content ol {
+    margin: 0;
+    padding-left: 24px;
+    color: #d7d7d7;
+    line-height: 2;
+}
+
+.album-detail-content li::marker {
+    color: #cfb6bc;
+}
+
+.album-detail-page > h1 {
+    color: #cfb6bc;
+}
+
+.album-detail-page > p {
+    color: #d7d7d7;
+    margin-bottom: 24px;
+}
+
+.imgGal img {
+    cursor: pointer;
+}
+
+.gallery-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.92);
+}
+
+.gallery-modal img {
+    max-width: min(100%, 1100px);
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+.gallery-modal-close {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    border: 0;
+    background: transparent;
+    color: #cfb6bc;
+    font-size: 42px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.gallery-modal-close:hover {
+    color: #fff;
+}
+
+.post-action {
+    border: 0;
+    background: transparent;
+    color: #555;
+    cursor: pointer;
+    font: inherit;
+}
+
+.post-action:hover {
+    color: #cfb6bc;
+}
+
+.post-action.liked {
+    color: #cfb6bc;
+}
+
+@media (max-width: 768px) {
+    .gallery-modal {
+        padding: 20px;
+    }
+
+    .gallery-modal-close {
+        top: 15px;
+        right: 20px;
+        font-size: 34px;
+    }
+}
+
+.post-form {
+    margin-bottom: 24px;
+    padding: 20px;
+    background: #fff;
+}
+
+.post-form textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 14px;
+    border: 1px solid #ddd;
+    resize: vertical;
+    font: inherit;
+}
+
+.post-form button {
+    margin-top: 12px;
+    padding: 10px 22px;
+    border: 0;
+    background: #cfb6bc;
+    color: #000;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.post-form button:hover {
+    background: #000;
+    color: #cfb6bc;
+}
+
 /* Responsive */
 
 @media (max-width: 800px) {
@@ -901,5 +1101,23 @@ button {
 
     .post-list {
         padding: 15px;
+    }
+
+    .album-detail-page {
+        padding: 120px 24px 60px;
+    }
+
+    .album-detail {
+        grid-template-columns: 1fr;
+        gap: 42px;
+    }
+
+    .album-detail-image {
+        max-width: 420px;
+        margin: 0 auto;
+    }
+
+    .album-detail-content h1 {
+        font-size: 58px;
     }
 }

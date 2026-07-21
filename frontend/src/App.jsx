@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import AlbumDetail from "./pages/AlbumDetail";
 import Albums from "./pages/Albums";
 import Community from "./pages/Community";
 import Gallery from "./pages/Gallery";
@@ -15,6 +16,7 @@ function App() {
                 <Route path="/albums" element={<Albums />} />
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/community" element={<Community />} />
+                <Route path="/albums/:slug" element={<AlbumDetail />} />
             </Routes>
         </>
     );
