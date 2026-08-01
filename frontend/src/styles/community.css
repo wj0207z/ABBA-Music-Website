@@ -1,0 +1,198 @@
+.community-page {
+    min-height: 100vh;
+    padding: 160px 8vw 100px;
+    background-color: #000;
+}
+
+.community-heading {
+    max-width: 700px;
+    margin: 0 auto 55px;
+    text-align: center;
+}
+
+.community-heading h1 {
+    margin: 0;
+    color: #cfb6bc;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 65px;
+    letter-spacing: 6px;
+}
+
+.community-heading > p:not(.eyebrow) {
+    color: #fff;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+.community-layout {
+    display: grid;
+    grid-template-columns: 280px minmax(400px, 700px);
+    justify-content: center;
+    gap: 25px;
+}
+
+.profile-card {
+    height: fit-content;
+    padding: 24px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #101010;
+    text-align: center;
+}
+
+.profile-avatar {
+    display: grid;
+    place-items: center;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background-color: #cfb6bc;
+    color: #101010;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.profile-card h2 {
+    margin: 0 0 6px;
+    color: #101010;
+}
+
+.username {
+    margin: 0;
+    color: #777;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-between;
+    margin: 28px 0;
+}
+
+.profile-stats strong,
+.profile-stats span {
+    display: block;
+}
+
+.profile-stats strong {
+    color: #9f777f;
+    font-size: 20px;
+}
+
+.profile-stats span {
+    margin-top: 5px;
+    color: #101010;
+    font-size: 11px;
+}
+
+.profile-button {
+    padding: 10px 15px;
+    border: 1px solid #9f777f;
+    background-color: transparent;
+    color: #9f777f;
+}
+
+.profile-button:hover {
+    background-color: #9f777f;
+    color: #fff;
+}
+
+.post-list {
+    padding: 25px;
+    background-color: #fff;
+}
+
+.post-form {
+    margin-bottom: 24px;
+    padding: 20px;
+    background: #f3f3f3;
+}
+
+.post-form textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 14px;
+    border: 1px solid #ddd;
+    resize: vertical;
+    font: inherit;
+}
+
+.post-form button {
+    margin-top: 12px;
+    padding: 10px 22px;
+    border: 0;
+    background: #cfb6bc;
+    color: #000;
+    font-weight: 600;
+}
+
+.post-form button:hover {
+    background: #000;
+    color: #cfb6bc;
+}
+
+.community-post {
+    margin-bottom: 20px;
+    padding: 24px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #101010;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.post-header strong {
+    color: #101010;
+}
+
+.post-header span {
+    color: #777;
+    font-size: 12px;
+}
+
+.community-post > p {
+    color: #101010;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.post-actions {
+    display: flex;
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.post-action {
+    border: 0;
+    background: transparent;
+    color: #9f777f;
+}
+
+.post-action:hover,
+.post-action.liked {
+    color: #101010;
+}
+
+@media (max-width: 800px) {
+    .community-page {
+        padding: 110px 25px 70px;
+    }
+
+    .community-heading h1 {
+        font-size: 45px;
+    }
+
+    .community-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .post-list {
+        padding: 15px;
+    }
+}

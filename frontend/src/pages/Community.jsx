@@ -1,40 +1,66 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
+import api from "../api/axios";
 
 function Community() {
-
-    const [liked, setLiked] = useState(false);
-    const [likeCount, setLikeCount] = useState(74);
-
     const [postText, setPostText] = useState("");
     const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+    const [likedPosts, setLikedPosts] = useState({});
 
-    function handleLike() {
-        if (liked) {
-            setLikeCount(likeCount - 1);
-        } else {
-            setLikeCount(likeCount + 1);
+    useEffect(() => {
+        async function fetchPosts() {
+            try {
+                const response = await api.get("/posts");
+                setPosts(response.data);
+            } catch (error) {
+                setError("Failed to load posts.");
+            } finally {
+                setLoading(false);
+            }
         }
-    
-        setLiked(!liked);
-    }
 
-    function handleSubmit(event) {
+        fetchPosts();
+    }, []);
+
+    async function handleSubmit(event) {
         event.preventDefault();
-    
+
         if (postText.trim() === "") {
             return;
         }
-    
-        const newPost = {
-            id: Date.now(),
-            author: "You",
-            content: postText,
-            createdAt: "Just now",
-        };
-    
-        setPosts([newPost, ...posts]);
-        setPostText("");
+
+        try {
+            const response = await api.post("/posts", {
+                author: "Guest User",
+                content: postText,
+            });
+
+            setPosts((currentPosts) => [
+                response.data.post,
+                ...currentPosts,
+            ]);
+
+            setPostText("");
+            setError("");
+        } catch (error) {
+            setError("Failed to create post.");
+        }
+    }
+
+    function handleLike(postId) {
+        setLikedPosts((currentLikes) => ({
+            ...currentLikes,
+            [postId]: !currentLikes[postId],
+        }));
+    }
+
+    function formatDate(date) {
+        if (!date) {
+            return "Just now";
+        }
+
+        return new Date(date).toLocaleString();
     }
 
     return (
@@ -79,88 +105,68 @@ function Community() {
                     </button>
                 </aside>
 
-                <form className="post-form" onSubmit={handleSubmit}>
-                    <textarea
-                        value={postText}
-                        onChange={(event) => setPostText(event.target.value)}
-                        placeholder="Share something about ABBA..."
-                    />
-
-                    <button type="submit">
-                        Post
-                    </button>
-                </form>
-
                 <section className="post-list">
-                    {posts.map((post) => (
-                        <article className="community-post" key={post.id}>
-                            <div className="post-header">
-                                <strong>{post.author}</strong>
-                                <span>{post.createdAt}</span>
-                            </div>
+                    <form className="post-form" onSubmit={handleSubmit}>
+                        <textarea
+                            value={postText}
+                            onChange={(event) =>
+                                setPostText(event.target.value)
+                            }
+                            placeholder="Share something about ABBA..."
+                        />
 
-                            <p>{post.content}</p>
+                        <button type="submit">
+                            Post
+                        </button>
+                    </form>
 
-                            <div className="post-actions">
-                                <button>♡ 0</button>
-                                <button>◇ 0</button>
-                                <button>Comment</button>
-                            </div>
-                        </article>
-                        
-                    ))}
-                    
-                        <article className="community-post">
-                        <div className="post-header">
-                            <strong>Elena Starling</strong>
-                            <span>2 hours ago</span>
-                        </div>
+                    {loading && <p>Loading posts...</p>}
 
-                        <p>
-                            There is something magical about the way this song
-                            builds. Timeless!
-                        </p>
+                    {error && <p className="error">{error}</p>}
 
-                        <div className="song-preview">
-                            <div className="song-cover">✦</div>
+                    {!loading && !error && posts.length === 0 && (
+                        <p>No posts yet.</p>
+                    )}
 
-                            <div>
-                                <strong>Dancing Queen</strong>
-                                <span>Arrival · 1976</span>
-                            </div>
+                    {posts.map((post) => {
+                        const isLiked = Boolean(likedPosts[post.id]);
+                        const displayedLikes =
+                            post.likes + (isLiked ? 1 : 0);
 
-                            <button className="play-button">
-                                ▶
-                            </button>
-                        </div>
-
-                        <div className="post-actions">
-                            <button
-                                className={liked ? "post-action liked" : "post-action"}
-                                onClick={handleLike}
+                        return (
+                            <article
+                                className="community-post"
+                                key={post.id}
                             >
-                                {liked ? "♥" : "♡"} {likeCount}
-                            </button>                            <button>◇ 24</button>
-                            <button>Comment</button>
-                        </div>
-                    </article>
+                                <div className="post-header">
+                                    <strong>{post.author}</strong>
+                                    <span>
+                                        {formatDate(post.created_at)}
+                                    </span>
+                                </div>
 
-                    <article className="community-post">
-                        <div className="post-header">
-                            <strong>Marina79</strong>
-                            <span>1 hour ago</span>
-                        </div>
+                                <p>{post.content}</p>
 
-                        <p>
-                            ABBA's music still gives me chills every time.
-                        </p>
+                                <div className="post-actions">
+                                    <button
+                                        className={
+                                            isLiked
+                                                ? "post-action liked"
+                                                : "post-action"
+                                        }
+                                        onClick={() => handleLike(post.id)}
+                                    >
+                                        {isLiked ? "♥" : "♡"}{" "}
+                                        {displayedLikes}
+                                    </button>
 
-                        <div className="post-actions">
-                            <button>♡ 42</button>
-                            <button>◇ 9</button>
-                            <button>Comment</button>
-                        </div>
-                    </article>
+                                    <button className="post-action">
+                                        Comment
+                                    </button>
+                                </div>
+                            </article>
+                        );
+                    })}
                 </section>
             </section>
         </main>

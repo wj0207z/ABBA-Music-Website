@@ -5,6 +5,7 @@ import Albums from "./pages/Albums";
 import Community from "./pages/Community";
 import Gallery from "./pages/Gallery";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 
 function App() {
     return (
@@ -13,6 +14,7 @@ function App() {
 
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/albums" element={<Albums />} />
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/community" element={<Community />} />

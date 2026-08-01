@@ -1,0 +1,167 @@
+.gallery-page {
+    min-height: 100vh;
+    padding-top: 145px;
+    background-color: #000;
+}
+
+.gallery-page > h1 {
+    margin: 0 0 10px 300px;
+    color: #cfb6bc;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 80px;
+    letter-spacing: 7px;
+}
+
+.scrollContainer {
+    width: 100%;
+    overflow-x: auto;
+    padding: 20px 0;
+    scrollbar-color: #cfb6bc #101010;
+    scrollbar-width: thin;
+}
+
+.UScon {
+    width: max-content;
+    padding: 20px 0;
+}
+
+.imgGal {
+    display: flex;
+    gap: 8px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.imgGal img {
+    display: block;
+    cursor: pointer;
+    object-fit: cover;
+}
+
+.img1 img {
+    width: 240px;
+    height: 420px;
+}
+
+.img2 img {
+    width: 240px;
+    height: 150px;
+}
+
+.img3 img {
+    width: 465px;
+    height: 270px;
+}
+
+.img4 img {
+    width: 465px;
+    height: 300px;
+}
+
+.img5 img {
+    width: 600px;
+    height: 345px;
+}
+
+.img67,
+.img89 {
+    display: flex;
+    gap: 8px;
+}
+
+.img6 img {
+    width: 225px;
+    height: 225px;
+}
+
+.img7 img {
+    width: 363px;
+    height: 225px;
+}
+
+.img8 img {
+    width: 367px;
+    height: 225px;
+}
+
+.img9 img {
+    width: 292px;
+    height: 225px;
+}
+
+.img10 img {
+    width: 675px;
+    height: 345px;
+}
+
+.img11 img,
+.img12 img {
+    width: 405px;
+    height: 285px;
+}
+
+.img13 img,
+.img14 img {
+    width: 375px;
+}
+
+.img13 img {
+    height: 255px;
+}
+
+.img14 img {
+    height: 315px;
+}
+
+.gallery-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background: rgba(0, 0, 0, 0.92);
+}
+
+.gallery-modal img {
+    max-width: min(100%, 1100px);
+    max-height: 90vh;
+    object-fit: contain;
+}
+
+.gallery-modal-close {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    border: 0;
+    background: transparent;
+    color: #cfb6bc;
+    font-size: 42px;
+    line-height: 1;
+}
+
+.gallery-modal-close:hover {
+    color: #fff;
+}
+
+@media (max-width: 800px) {
+    .gallery-page > h1 {
+        margin-left: 25px;
+        font-size: 50px;
+    }
+
+    .gallery-modal {
+        padding: 20px;
+    }
+
+    .gallery-modal-close {
+        top: 15px;
+        right: 20px;
+        font-size: 34px;
+    }
+}
