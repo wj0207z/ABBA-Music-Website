@@ -32,7 +32,6 @@ function Community() {
 
         try {
             const response = await api.post("/posts", {
-                author: "Guest User",
                 content: postText,
             });
 
@@ -44,7 +43,11 @@ function Community() {
             setPostText("");
             setError("");
         } catch (error) {
-            setError("Failed to create post.");
+            if (error.response?.status === 401) {
+                setError("Please log in to create a post.");
+            } else {
+                setError("Failed to create post.");
+            }
         }
     }
 

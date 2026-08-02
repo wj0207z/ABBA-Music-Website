@@ -4,79 +4,203 @@
     left: 0;
     z-index: 10;
     width: 100%;
-    padding: 1px;
-    background-color: #101010;
+    height: 92px;
+    border-bottom: 1px solid #292929;
+    background: #101010;
+}
+
+.navbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(100% - 74px, 1450px);
+    height: 100%;
+    margin: 0 auto;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 200px;
+    color: #fff;
     font-family: "Lulo Clean One", sans-serif;
-    font-size: 13.5px;
+    font-size: 19px;
     font-weight: 600;
     letter-spacing: 2.5px;
+    text-decoration: none;
+}
+
+.navbar-brand img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
 }
 
 .nav-links {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    gap: 46px;
 }
 
-.nav-links li {
-    padding: 5px 70px;
+.nav-links a {
+    color: #c7a6ae;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2.8px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
-.nav-links li a {
-    position: relative;
-    color: #cfb6bc;
-}
-
-.nav-links li a::after {
-    content: "";
-    display: block;
-    width: 0;
-    height: 3px;
-    margin: 6px auto 0;
-    background-color: #fff;
-    transition: width 0.15s linear;
-}
-
-.nav-links li a:hover {
+.nav-links a:hover {
     color: #fff;
 }
 
-.nav-links li a:hover::after {
-    width: 100%;
+.navbar-auth {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    min-width: 210px;
 }
 
-.homeIcon img {
+.user-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: #fff;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.user-icon {
     display: block;
-    width: 70px;
-    height: 70px;
-    margin-top: -5px;
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
 }
 
-@media (max-width: 800px) {
-    .navbar {
-        position: relative;
+.login-button,
+.logout-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 86px;
+    padding: 10px 16px;
+    border: 1px solid #806c72;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.login-button:hover,
+.logout-button:hover {
+    border-color: #c7a6ae;
+    background: #c7a6ae;
+    color: #111;
+}
+
+.register-button {
+    padding: 10px 16px;
+    border: 1px solid #c7a6ae;
+    color: #e1c5cb !important;
+}
+
+.register-button:hover {
+    background: #c7a6ae;
+    color: #111 !important;
+}
+
+@media (max-width: 1100px) {
+    .navbar-inner {
+        width: min(100% - 40px, 1000px);
     }
 
     .nav-links {
+        gap: 25px;
+    }
+
+    .navbar-auth {
+        min-width: auto;
+    }
+
+    .user-status span:last-child {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    .navbar-inner {
+        width: min(100% - 32px, 700px);
+    }
+
+    .navbar-brand {
+        min-width: auto;
+    }
+
+    .navbar-brand span {
+        display: none;
+    }
+
+    .nav-links {
+        gap: 18px;
+    }
+
+    .user-status {
+        display: none;
+    }
+}
+
+@media (max-width: 650px) {
+    .navbar {
+        position: relative;
+        height: auto;
+    }
+
+    .navbar-inner {
         flex-wrap: wrap;
-        gap: 12px;
-        padding: 10px;
+        justify-content: center;
+        gap: 18px;
+        padding: 16px 0;
     }
 
-    .nav-links li {
-        padding: 5px 8px;
-    }
-
-    .homeIcon {
-        order: -1;
+    .navbar-brand {
         width: 100%;
-        text-align: center;
+        justify-content: center;
     }
 
-    .homeIcon img {
-        margin: 0 auto;
+    .navbar-brand span {
+        display: inline;
+    }
+
+    .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 14px;
+    }
+
+    .navbar-auth {
+        position: absolute;
+        top: 24px;
+        right: 16px;
+        min-width: auto;
     }
 }

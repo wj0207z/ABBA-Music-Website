@@ -19,11 +19,12 @@ class PostController extends Controller
     {
         $validated = $request->validate([
             'content' => ['required', 'string', 'max:2000'],
-            'author' => ['nullable', 'string', 'max:100'],
         ]);
 
+        $user = $request->user();
+
         $post = Post::create([
-            'author' => $validated['author'] ?? 'Guest User',
+            'author' => $user->name,
             'content' => $validated['content'],
             'likes' => 0,
         ]);
