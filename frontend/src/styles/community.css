@@ -179,6 +179,128 @@
     color: #101010;
 }
 
+.my-posts-list {
+    width: min(100%, 760px);
+    margin: 0 auto;
+    padding: 24px;
+    background: #fff;
+}
+
+.my-posts-list::before {
+    content: "YOUR POST HISTORY";
+    display: block;
+    margin-bottom: 20px;
+    color: #9f777f;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.my-posts-list .community-post {
+    margin-bottom: 16px;
+    padding: 22px;
+    border: 1px solid #dedede;
+    background: #fafafa;
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.my-posts-list .community-post:hover {
+    border-color: #c7a6ae;
+    transform: translateY(-2px);
+}
+
+.my-posts-list .community-post:last-child {
+    margin-bottom: 0;
+}
+
+.my-posts-list .post-header {
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.my-posts-list .post-header strong {
+    color: #222;
+    font-size: 15px;
+}
+
+.my-posts-list .post-header span {
+    color: #888;
+    font-size: 12px;
+}
+
+.my-posts-list .community-post > p {
+    margin: 18px 0;
+    color: #222;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.back-to-community {
+    width: min(100%, 760px);
+    margin: 22px auto 0;
+    text-align: center;
+}
+
+.back-to-community a {
+    color: #c7a6ae;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.back-to-community a:hover {
+    color: #fff;
+}
+
+.edit-post-input {
+    width: 100%;
+    min-height: 110px;
+    margin-top: 18px;
+    padding: 14px;
+    border: 1px solid #c7a6ae;
+    background: #fff;
+    color: #222;
+    font: inherit;
+    resize: vertical;
+}
+
+.post-manage-action {
+    padding: 8px 14px;
+    border: 1px solid #9f777f;
+    background: transparent;
+    color: #9f777f;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.post-manage-action:hover {
+    background: #9f777f;
+    color: #fff;
+}
+
+.post-manage-action:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.delete-post-action {
+    border-color: #a45f5f;
+    color: #a45f5f;
+}
+
+.delete-post-action:hover {
+    background: #a45f5f;
+    color: #fff;
+}
+
 @media (max-width: 800px) {
     .community-page {
         padding: 110px 25px 70px;
@@ -194,5 +316,20 @@
 
     .post-list {
         padding: 15px;
+
     }
+
+    .my-posts-list {
+        width: 100%;
+        padding: 16px;
+    }
+
+    .my-posts-list .community-post {
+        padding: 18px;
+    }
+
+    .my-posts-list .community-post > p {
+        font-size: 16px;
+    }
+    
 }

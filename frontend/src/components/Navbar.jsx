@@ -44,7 +44,26 @@ function Navbar() {
                     <Link to="/">Home</Link>
                     <Link to="/albums">Albums</Link>
                     <Link to="/gallery">Gallery</Link>
-                    <Link to="/community">Community</Link>
+
+                    <div className="nav-dropdown">
+                        <span className="nav-dropdown-label">
+                            Community
+                        </span>
+
+                        <div className="nav-dropdown-menu">
+                            <Link to="/community">
+                                Community Feed
+                            </Link>
+
+                            <Link to="/my-posts">
+                                My Posts
+                            </Link>
+
+                            <Link to="/chatroom">
+                                Chat Room
+                            </Link>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="navbar-auth">

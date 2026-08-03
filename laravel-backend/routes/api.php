@@ -18,4 +18,8 @@ Route::get('/posts', [PostController::class, 'index']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/posts', [PostController::class, 'store']);
+    Route::get('/my-posts', [PostController::class, 'myPosts']);
+
+    Route::put('/posts/{post}', [PostController::class, 'update']);
+    Route::delete('/posts/{post}', [PostController::class, 'destroy']);
 });

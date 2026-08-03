@@ -7,7 +7,23 @@ function Community() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [likedPosts, setLikedPosts] = useState({});
+    const [myPosts, setMyPosts] = useState([]);
 
+
+    //get user data from localStorage
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    const displayName = user?.name || "Guest User";
+
+    const initials = displayName
+        .split(" ")
+        .map((word) => word[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase();
+
+    const postCount = myPosts.length;
+    
     useEffect(() => {
         async function fetchPosts() {
             try {
@@ -20,7 +36,22 @@ function Community() {
             }
         }
 
+        async function fetchMyPosts() {
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (!user) {
+                return;
+            }
+
+            try {
+                const response = await api.get("/my-posts");
+                setMyPosts(response.data);
+            } catch (error) {
+                setError("Failed to load user's posts.");
+            }
+        }
+
         fetchPosts();
+        fetchMyPosts();
     }, []);
 
     async function handleSubmit(event) {
@@ -35,9 +66,16 @@ function Community() {
                 content: postText,
             });
 
+            const newPost = response.data.post;
+
             setPosts((currentPosts) => [
-                response.data.post,
+                newPost,
                 ...currentPosts,
+            ]);
+
+            setMyPosts((currentMyPosts) => [
+                newPost,
+                ...currentMyPosts,
             ]);
 
             setPostText("");
@@ -80,25 +118,31 @@ function Community() {
 
             <section className="community-layout">
                 <aside className="profile-card">
-                    <div className="profile-avatar">ES</div>
+                    <div className="profile-avatar">
+                        {initials}
+                    </div>
 
-                    <h2>Elena Starling</h2>
+                    <h2>{displayName}</h2>
 
-                    <p className="username">@elenastarling</p>
+                    <p className="username">
+                        {user
+                        ? `@${user.name.toLowerCase().replaceAll(" ", "")}`
+                        : "@guest"}
+                    </p>
 
                     <div className="profile-stats">
                         <div>
-                            <strong>124</strong>
+                            <strong>{postCount}</strong>
                             <span>Posts</span>
                         </div>
 
                         <div>
-                            <strong>362</strong>
+                            <strong>0</strong>
                             <span>Followers</span>
                         </div>
 
                         <div>
-                            <strong>198</strong>
+                            <strong>0</strong>
                             <span>Following</span>
                         </div>
                     </div>
@@ -109,6 +153,7 @@ function Community() {
                 </aside>
 
                 <section className="post-list">
+
                     <form className="post-form" onSubmit={handleSubmit}>
                         <textarea
                             value={postText}
@@ -128,7 +173,9 @@ function Community() {
                     {error && <p className="error">{error}</p>}
 
                     {!loading && !error && posts.length === 0 && (
-                        <p>No posts yet.</p>
+                        <p>
+                            No posts to display. Be the first to share
+                        </p>
                     )}
 
                     {posts.map((post) => {

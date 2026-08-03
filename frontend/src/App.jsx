@@ -6,6 +6,7 @@ import Community from "./pages/Community";
 import Gallery from "./pages/Gallery";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import MyPosts from "./pages/MyPosts";
 import Register from "./pages/Register";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                     path="/albums/:slug"
                     element={<AlbumDetail />}
                 />
+                <Route path="/my-posts" element={<MyPosts />} />
             </Routes>
         </>
     );

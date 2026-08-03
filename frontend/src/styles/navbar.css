@@ -43,8 +43,10 @@
     gap: 46px;
 }
 
-.nav-links a {
+.nav-links > a,
+.nav-dropdown-label {
     color: #c7a6ae;
+    cursor: pointer;
     font-family: "Lulo Clean One", sans-serif;
     font-size: 14px;
     font-weight: 600;
@@ -54,9 +56,74 @@
     transition: color 0.2s ease;
 }
 
-.nav-links a:hover {
+.nav-links > a:hover,
+.nav-dropdown-label:hover {
     color: #fff;
 }
+
+/* Community dropdown */
+
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown-label {
+    display: block;
+}
+
+.nav-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 24px);
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    min-width: 205px;
+    padding: 8px 0;
+    border: 1px solid #3d3034;
+    background: #121212;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, -8px);
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.nav-dropdown-menu::before {
+    content: "";
+    position: absolute;
+    top: -25px;
+    left: 0;
+    width: 100%;
+    height: 25px;
+}
+
+.nav-dropdown-menu a {
+    display: block;
+    padding: 13px 18px;
+    color: #c7a6ae;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav-dropdown-menu a:hover {
+    background: #242024;
+    color: #fff;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown:focus-within .nav-dropdown-menu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
+}
+
+/* User area */
 
 .navbar-auth {
     display: flex;
@@ -116,16 +183,7 @@
     color: #111;
 }
 
-.register-button {
-    padding: 10px 16px;
-    border: 1px solid #c7a6ae;
-    color: #e1c5cb !important;
-}
-
-.register-button:hover {
-    background: #c7a6ae;
-    color: #111 !important;
-}
+/* Responsive layout */
 
 @media (max-width: 1100px) {
     .navbar-inner {
@@ -138,10 +196,6 @@
 
     .navbar-auth {
         min-width: auto;
-    }
-
-    .user-status span:last-child {
-        display: none;
     }
 }
 
@@ -202,5 +256,23 @@
         top: 24px;
         right: 16px;
         min-width: auto;
+    }
+
+    .nav-dropdown {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-dropdown-menu {
+        position: static;
+        width: min(100%, 260px);
+        margin: 12px auto 0;
+        opacity: 1;
+        pointer-events: auto;
+        transform: none;
+    }
+
+    .nav-dropdown-menu::before {
+        display: none;
     }
 }
