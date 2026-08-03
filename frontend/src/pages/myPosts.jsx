@@ -6,9 +6,21 @@ function MyPosts() {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    const [editingId, setEditingId] = useState(null);
-    const [editText, setEditText] = useState("");
-    const [saving, setSaving] = useState(false);
+
+    const [selectionMode, setSelectionMode] =
+        useState(false);
+
+    const [selectedPostId, setSelectedPostId] =
+        useState(null);
+
+    const [editingId, setEditingId] =
+        useState(null);
+
+    const [editText, setEditText] =
+        useState("");
+
+    const [saving, setSaving] =
+        useState(false);
 
     useEffect(() => {
         async function fetchMyPosts() {
@@ -29,9 +41,35 @@ function MyPosts() {
         fetchMyPosts();
     }, []);
 
-    function startEditing(post) {
-        setEditingId(post.id);
-        setEditText(post.content);
+    function enterSelectionMode() {
+        setSelectionMode(true);
+        setSelectedPostId(null);
+        setError("");
+    }
+
+    function cancelSelection() {
+        setSelectionMode(false);
+        setSelectedPostId(null);
+        setError("");
+    }
+
+    function startEditing() {
+        if (!selectedPostId) {
+            setError("Please choose a post to edit.");
+            return;
+        }
+
+        const selectedPost = posts.find(
+            (post) => post.id === selectedPostId
+        );
+
+        if (!selectedPost) {
+            return;
+        }
+
+        setEditingId(selectedPost.id);
+        setEditText(selectedPost.content);
+        setSelectionMode(false);
         setError("");
     }
 
@@ -40,7 +78,27 @@ function MyPosts() {
         setEditText("");
     }
 
-    async function handleUpdate(postId) {
+    function getPostDateLabel(post) {
+        const createdTime = new Date(
+            post.created_at
+        ).getTime();
+
+        const updatedTime = new Date(
+            post.updated_at
+        ).getTime();
+
+        if (updatedTime > createdTime) {
+            return `Modified at ${formatDate(
+                post.updated_at
+            )}`;
+        }
+
+        return `Posted at ${formatDate(
+            post.created_at
+        )}`;
+    }
+
+    async function handleUpdate() {
         if (editText.trim() === "") {
             setError("Post content cannot be empty.");
             return;
@@ -51,7 +109,7 @@ function MyPosts() {
 
         try {
             const response = await api.put(
-                `/posts/${postId}`,
+                `/posts/${editingId}`,
                 {
                     content: editText,
                 }
@@ -59,7 +117,7 @@ function MyPosts() {
 
             setPosts((currentPosts) =>
                 currentPosts.map((post) =>
-                    post.id === postId
+                    post.id === editingId
                         ? response.data.post
                         : post
                 )
@@ -76,7 +134,12 @@ function MyPosts() {
         }
     }
 
-    async function handleDelete(postId) {
+    async function handleDelete() {
+        if (!selectedPostId) {
+            setError("Please choose a post to delete.");
+            return;
+        }
+
         const confirmed = window.confirm(
             "Are you sure you want to delete this post?"
         );
@@ -86,13 +149,17 @@ function MyPosts() {
         }
 
         try {
-            await api.delete(`/posts/${postId}`);
+            await api.delete(
+                `/posts/${selectedPostId}`
+            );
 
             setPosts((currentPosts) =>
                 currentPosts.filter(
-                    (post) => post.id !== postId
+                    (post) => post.id !== selectedPostId
                 )
             );
+
+            cancelSelection();
         } catch (error) {
             setError(
                 error.response?.data?.message ||
@@ -122,7 +189,69 @@ function MyPosts() {
             </section>
 
             <section className="post-list my-posts-list">
-                {loading && <p>Loading your posts...</p>}
+                <div className="my-posts-toolbar">
+                    <div>
+                        <p className="history-label">
+                            YOUR POST HISTORY
+                        </p>
+
+                        <h2>
+                            {selectionMode
+                                ? "Choose a post"
+                                : "My Posts"}
+                        </h2>
+                    </div>
+
+                    {!selectionMode &&
+                        !editingId && (
+                            <button
+                                className="select-post-button"
+                                onClick={enterSelectionMode}
+                            >
+                                <span aria-hidden="true">
+                                    ✎
+                                </span>
+                                Edit
+                            </button>
+                        )}
+                </div>
+
+                {selectionMode && (
+                    <div className="selection-toolbar">
+                        <p>
+                            Please choose a post to edit or delete.
+                        </p>
+
+                        <div>
+                            <button
+                                className="manage-selected-button"
+                                onClick={startEditing}
+                                disabled={!selectedPostId}
+                            >
+                                Edit Selected
+                            </button>
+
+                            <button
+                                className="delete-selected-button"
+                                onClick={handleDelete}
+                                disabled={!selectedPostId}
+                            >
+                                Delete Selected
+                            </button>
+
+                            <button
+                                className="cancel-selection-button"
+                                onClick={cancelSelection}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                )}
+
+                {loading && (
+                    <p>Loading your posts...</p>
+                )}
 
                 {error && (
                     <p className="error">
@@ -142,7 +271,11 @@ function MyPosts() {
                     !error &&
                     posts.map((post) => (
                         <article
-                            className="community-post"
+                            className={
+                                selectedPostId === post.id
+                                    ? "community-post selected-post"
+                                    : "community-post"
+                            }
                             key={post.id}
                         >
                             <div className="post-header">
@@ -151,9 +284,7 @@ function MyPosts() {
                                 </strong>
 
                                 <span>
-                                    {formatDate(
-                                        post.created_at
-                                    )}
+                                    {getPostDateLabel(post)}
                                 </span>
                             </div>
 
@@ -171,11 +302,9 @@ function MyPosts() {
 
                                     <div className="post-actions">
                                         <button
-                                            className="post-manage-action"
-                                            onClick={() =>
-                                                handleUpdate(
-                                                    post.id
-                                                )
+                                            className="manage-selected-button"
+                                            onClick={
+                                                handleUpdate
                                             }
                                             disabled={saving}
                                         >
@@ -185,7 +314,7 @@ function MyPosts() {
                                         </button>
 
                                         <button
-                                            className="post-manage-action"
+                                            className="cancel-selection-button"
                                             onClick={
                                                 cancelEditing
                                             }
@@ -203,27 +332,27 @@ function MyPosts() {
                                             {post.likes} Likes
                                         </span>
 
-                                        <button
-                                            className="post-manage-action"
-                                            onClick={() =>
-                                                startEditing(
-                                                    post
-                                                )
-                                            }
-                                        >
-                                            Edit
-                                        </button>
+                                        {selectionMode && (
+                                            <label className="post-selector">
+                                                <input
+                                                    type="radio"
+                                                    name="selectedPost"
+                                                    checked={
+                                                        selectedPostId ===
+                                                        post.id
+                                                    }
+                                                    onChange={() =>
+                                                        setSelectedPostId(
+                                                            post.id
+                                                        )
+                                                    }
+                                                />
 
-                                        <button
-                                            className="post-manage-action delete-post-action"
-                                            onClick={() =>
-                                                handleDelete(
-                                                    post.id
-                                                )
-                                            }
-                                        >
-                                            Delete
-                                        </button>
+                                                <span>
+                                                    Select
+                                                </span>
+                                            </label>
+                                        )}
                                     </div>
                                 </>
                             )}
