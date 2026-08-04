@@ -1,243 +1,162 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import api from "../api/axios";
+import { useState } from "react";
 
-function MyPosts() {
-    const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState("");
-    const [editingId, setEditingId] = useState(null);
-    const [editText, setEditText] = useState("");
-    const [saving, setSaving] = useState(false);
+function Gallery() {
+    const imagePath = "/images/biography/photogrid";
+    const [selectedImage, setSelectedImage] = useState(null);
 
-    useEffect(() => {
-        async function fetchMyPosts() {
-            try {
-                const response = await api.get("/my-posts");
-                setPosts(response.data);
-            } catch (error) {
-                setError(
-                    error.response?.status === 401
-                        ? "Please log in to view your posts."
-                        : "Failed to load your posts."
-                );
-            } finally {
-                setLoading(false);
-            }
+    function openImage(event) {
+        const image = event.target.closest("img");
+
+        if (image) {
+            setSelectedImage(image.src);
         }
-
-        fetchMyPosts();
-    }, []);
-
-    function startEditing(post) {
-        setEditingId(post.id);
-        setEditText(post.content);
-        setError("");
-    }
-
-    function cancelEditing() {
-        setEditingId(null);
-        setEditText("");
-    }
-
-    async function handleUpdate(postId) {
-        if (editText.trim() === "") {
-            setError("Post content cannot be empty.");
-            return;
-        }
-
-        setSaving(true);
-        setError("");
-
-        try {
-            const response = await api.put(
-                `/posts/${postId}`,
-                {
-                    content: editText,
-                }
-            );
-
-            setPosts((currentPosts) =>
-                currentPosts.map((post) =>
-                    post.id === postId
-                        ? response.data.post
-                        : post
-                )
-            );
-
-            cancelEditing();
-        } catch (error) {
-            setError(
-                error.response?.data?.message ||
-                "Failed to update post."
-            );
-        } finally {
-            setSaving(false);
-        }
-    }
-
-    async function handleDelete(postId) {
-        const confirmed = window.confirm(
-            "Are you sure you want to delete this post?"
-        );
-
-        if (!confirmed) {
-            return;
-        }
-
-        try {
-            await api.delete(`/posts/${postId}`);
-
-            setPosts((currentPosts) =>
-                currentPosts.filter(
-                    (post) => post.id !== postId
-                )
-            );
-        } catch (error) {
-            setError(
-                error.response?.data?.message ||
-                "Failed to delete post."
-            );
-        }
-    }
-
-    function formatDate(date) {
-        if (!date) {
-            return "Just now";
-        }
-
-        return new Date(date).toLocaleString();
     }
 
     return (
-        <main className="community-page">
-            <section className="community-heading">
-                <p className="eyebrow">YOUR POSTS</p>
+        <main className="gallery-page">
+            <h1>US</h1>
 
-                <h1>My Posts</h1>
-
-                <p>
-                    View and manage the posts you have shared.
-                </p>
-            </section>
-
-            <section className="post-list my-posts-list">
-                {loading && <p>Loading your posts...</p>}
-
-                {error && (
-                    <p className="error">
-                        {error}
-                    </p>
-                )}
-
-                {!loading &&
-                    !error &&
-                    posts.length === 0 && (
-                        <p>
-                            You have not created any posts yet.
-                        </p>
-                    )}
-
-                {!loading &&
-                    !error &&
-                    posts.map((post) => (
-                        <article
-                            className="community-post"
-                            key={post.id}
-                        >
-                            <div className="post-header">
-                                <strong>
-                                    {post.author}
-                                </strong>
-
-                                <span>
-                                    {formatDate(
-                                        post.created_at
-                                    )}
-                                </span>
+            <div className="scrollContainer">
+                <div className="UScon">
+                    <div className="imgGal" onClick={openImage}>
+                        <div className="column">
+                            <div className="img1">
+                                <img
+                                    src={`${imagePath}/1.jpg`}
+                                    alt="ABBA members"
+                                />
                             </div>
 
-                            {editingId === post.id ? (
-                                <>
-                                    <textarea
-                                        className="edit-post-input"
-                                        value={editText}
-                                        onChange={(event) =>
-                                            setEditText(
-                                                event.target.value
-                                            )
-                                        }
+                            <div className="img2">
+                                <img
+                                    src={`${imagePath}/2.jpg`}
+                                    alt="ABBA members"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="column">
+                            <div className="img3">
+                                <img
+                                    src={`${imagePath}/3.jpg`}
+                                    alt="ABBA members"
+                                />
+                            </div>
+
+                            <div className="img4">
+                                <img
+                                    src={`${imagePath}/4.jpg`}
+                                    alt="ABBA members"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="column">
+                            <div className="img5">
+                                <img
+                                    src={`${imagePath}/5.jpg`}
+                                    alt="ABBA members"
+                                />
+                            </div>
+
+                            <div className="img67">
+                                <div className="img6">
+                                    <img
+                                        src={`${imagePath}/6.jpeg`}
+                                        alt="ABBA members"
                                     />
+                                </div>
 
-                                    <div className="post-actions">
-                                        <button
-                                            className="post-manage-action"
-                                            onClick={() =>
-                                                handleUpdate(
-                                                    post.id
-                                                )
-                                            }
-                                            disabled={saving}
-                                        >
-                                            {saving
-                                                ? "Saving..."
-                                                : "Save"}
-                                        </button>
+                                <div className="img7">
+                                    <img
+                                        src={`${imagePath}/7.png`}
+                                        alt="ABBA members"
+                                    />
+                                </div>
+                            </div>
+                        </div>
 
-                                        <button
-                                            className="post-manage-action"
-                                            onClick={
-                                                cancelEditing
-                                            }
-                                        >
-                                            Cancel
-                                        </button>
-                                    </div>
-                                </>
-                            ) : (
-                                <>
-                                    <p>{post.content}</p>
+                        <div className="column">
+                            <div className="img89">
+                                <div className="img8">
+                                    <img
+                                        src={`${imagePath}/8.jpg`}
+                                        alt="ABBA members"
+                                    />
+                                </div>
 
-                                    <div className="post-actions">
-                                        <span className="post-action">
-                                            {post.likes} Likes
-                                        </span>
+                                <div className="img9">
+                                    <img
+                                        src={`${imagePath}/9.png`}
+                                        alt="ABBA members"
+                                    />
+                                </div>
+                            </div>
 
-                                        <button
-                                            className="post-manage-action"
-                                            onClick={() =>
-                                                startEditing(
-                                                    post
-                                                )
-                                            }
-                                        >
-                                            Edit
-                                        </button>
+                            <div className="img10">
+                                <img
+                                    src={`${imagePath}/10.jpg`}
+                                    alt="ABBA members"
+                                />
+                            </div>
+                        </div>
 
-                                        <button
-                                            className="post-manage-action delete-post-action"
-                                            onClick={() =>
-                                                handleDelete(
-                                                    post.id
-                                                )
-                                            }
-                                        >
-                                            Delete
-                                        </button>
-                                    </div>
-                                </>
-                            )}
-                        </article>
-                    ))}
-            </section>
+                        <div className="column">
+                            <div className="img11">
+                                <img
+                                    src={`${imagePath}/11.jpg`}
+                                    alt="ABBA members"
+                                />
+                            </div>
 
-            <p className="back-to-community">
-                <Link to="/community">
-                    Back to Community Feed
-                </Link>
-            </p>
+                            <div className="img12">
+                                <img
+                                    src={`${imagePath}/12.jpg`}
+                                    alt="ABBA members"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="column">
+                            <div className="img13">
+                                <img
+                                    src={`${imagePath}/13.jpg`}
+                                    alt="ABBA members"
+                                />
+                            </div>
+
+                            <div className="img14">
+                                <img
+                                    src={`${imagePath}/14.jpg`}
+                                    alt="ABBA members"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {selectedImage && (
+                <div
+                    className="gallery-modal"
+                    onClick={() => setSelectedImage(null)}
+                >
+                    <button
+                        className="gallery-modal-close"
+                        onClick={() => setSelectedImage(null)}
+                    >
+                        Close
+                    </button>
+
+                    <img
+                        src={selectedImage}
+                        alt="Selected ABBA image"
+                        onClick={(event) => event.stopPropagation()}
+                    />
+                </div>
+            )}
         </main>
     );
 }
 
-export default MyPosts;
+export default Gallery;

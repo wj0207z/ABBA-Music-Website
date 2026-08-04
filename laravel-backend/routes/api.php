@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommentController;
 
 Route::get('/health', function () {
     return response()->json([
@@ -22,4 +23,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::put('/posts/{post}', [PostController::class, 'update']);
     Route::delete('/posts/{post}', [PostController::class, 'destroy']);
+
+    Route::post('/posts/{post}/comments', [CommentController::class, 'store']
+    );
 });
+
+Route::get('/posts/{post}/comments', [CommentController::class, 'index']
+);
