@@ -7,6 +7,7 @@ import Gallery from "./pages/Gallery";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import MyPosts from "./pages/MyPosts";
+import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
                     element={<AlbumDetail />}
                 />
                 <Route path="/my-posts" element={<MyPosts />} />
+                <Route path="/profile" element={<Profile />} />
             </Routes>
         </>
     );

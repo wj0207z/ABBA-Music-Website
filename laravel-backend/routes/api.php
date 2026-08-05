@@ -25,12 +25,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/posts/{post}', [PostController::class, 'update']);
     Route::delete('/posts/{post}', [PostController::class, 'destroy']);
 
-    Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
-
     Route::post('/posts/{post}/like', [LikeController::class, 'toggle']);
-
     Route::get('/liked-post-ids', [LikeController::class, 'likedPostIds']);
 
+    Route::post('/posts/{post}/comments', [CommentController::class, 'store']);
+    Route::put('/comments/{comment}', [CommentController::class, 'update']);
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy']);
+
+    Route::get('/me', [AuthController::class, 'me']);
+    Route::put('/me', [AuthController::class, 'updateMe']
+);
 });
 
 Route::get('/posts/{post}/comments', [CommentController::class, 'index']

@@ -59,4 +59,60 @@ class AuthController extends Controller
             'token' => $token,
         ]);
     }
+
+    public function me(Request $request): JsonResponse
+    {
+        $user = $request
+            ->user()
+            ->loadCount([
+                'posts',
+                'comments',
+                'postLikes as likes_count',
+            ]);
+
+        return response()->json($user);
+    }
+
+    public function updateMe(
+        Request $request
+    ): JsonResponse {
+        $user = $request->user();
+
+        $validated = $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:100',
+            ],
+            'email' => [
+                'required',
+                'email',
+                'max:255',
+                'unique:users,email,' . $user->id,
+            ],
+        ]);
+
+        $user->update([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+        ]);
+
+        return response()->json([
+            'message' => 'Profile updated successfully.',
+            'user' => $user->fresh()->loadCount([
+                'posts',
+                'comments',
+                'postLikes as likes_count',
+            ]),
+        ]);
+    }
+
+    public function logout(Request $request): JsonResponse
+    {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json([
+            'message' => 'Logged out successfully.',
+        ]);
+    }
 }

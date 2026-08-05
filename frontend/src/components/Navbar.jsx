@@ -70,6 +70,7 @@ function Navbar() {
                     {user ? (
                         <>
                             <span className="user-status">
+
                                 <img
                                     className="user-icon"
                                     src="/images/nav_icon/user.png"
@@ -80,6 +81,13 @@ function Navbar() {
                                 <span>{user.name}</span>
                             </span>
 
+                            <Link
+                                className="profile-nav-button"
+                                to="/profile"
+                            >
+                                Profile
+                            </Link>
+                            
                             <button
                                 className="logout-button"
                                 onClick={handleLogout}

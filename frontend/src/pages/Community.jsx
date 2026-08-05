@@ -15,6 +15,10 @@ function Community() {
     const [commentLoading, setCommentLoading] = useState({});
     const [commentError, setCommentError] = useState({});
 
+    const [editingCommentId, setEditingCommentId] = useState(null);
+    const [editingCommentText, setEditingCommentText] = useState("");
+    const [commentSaving, setCommentSaving] = useState(false);
+
 
     //get user data from localStorage
     const user = JSON.parse(localStorage.getItem("user"));
@@ -254,6 +258,99 @@ function Community() {
         }
     }
 
+    function startEditingComment(comment) {
+        setEditingCommentId(comment.id);
+        setEditingCommentText(comment.content);
+    }
+
+    function cancelEditingComment() {
+        setEditingCommentId(null);
+        setEditingCommentText("");
+    }
+
+    async function handleUpdateComment(postId, commentId) {
+        const content = editingCommentText.trim();
+
+        if (!content) {
+            setCommentError((current) => ({
+                ...current,
+                [postId]: "Comment cannot be empty.",
+            }));
+            return;
+        }
+
+        setCommentSaving(true);
+
+        try {
+            const response = await api.put(
+                `/comments/${commentId}`,
+                { content }
+            );
+
+            setCommentsByPost((current) => ({
+                ...current,
+                [postId]: current[postId].map((comment) =>
+                    comment.id === commentId
+                        ? response.data.comment
+                        : comment
+                ),
+            }));
+
+            cancelEditingComment();
+        } catch (error) {
+            setCommentError((current) => ({
+                ...current,
+                [postId]:
+                    error.response?.data?.message ||
+                    "Failed to update comment.",
+            }));
+        } finally {
+            setCommentSaving(false);
+        }
+    }
+
+    async function handleDeleteComment(postId, commentId) {
+        const confirmed = window.confirm(
+            "Are you sure you want to delete this comment?"
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        try {
+            await api.delete(`/comments/${commentId}`);
+
+            setCommentsByPost((current) => ({
+                ...current,
+                [postId]: current[postId].filter(
+                    (comment) => comment.id !== commentId
+                ),
+            }));
+
+            setPosts((currentPosts) =>
+                currentPosts.map((post) =>
+                    post.id === postId
+                        ? {
+                            ...post,
+                            comments_count: Math.max(
+                                0,
+                                (post.comments_count || 0) - 1
+                            ),
+                        }
+                        : post
+                )
+            );
+        } catch (error) {
+            setCommentError((current) => ({
+                ...current,
+                [postId]:
+                    error.response?.data?.message ||
+                    "Failed to delete comment.",
+            }));
+        }
+    }
+
     function formatDate(date) {
         if (!date) {
             return "Just now";
@@ -413,7 +510,69 @@ function Community() {
                                                     {formatDate(comment.created_at)}
                                                 </span>
 
-                                                <p>{comment.content}</p>
+                                                {editingCommentId === comment.id ? (
+                                                    <>
+                                                        <textarea
+                                                            className="comment-edit-input"
+                                                            value={editingCommentText}
+                                                            onChange={(event) =>
+                                                                setEditingCommentText(event.target.value)
+                                                            }
+                                                        />
+
+                                                        <div className="comment-manage-actions">
+                                                            <button
+                                                                type="button"
+                                                                onClick={() =>
+                                                                    handleUpdateComment(
+                                                                        post.id,
+                                                                        comment.id
+                                                                    )
+                                                                }
+                                                                disabled={commentSaving}
+                                                            >
+                                                                {commentSaving ? "Saving..." : "Save"}
+                                                            </button>
+
+                                                            <button
+                                                                type="button"
+                                                                onClick={cancelEditingComment}
+                                                            >
+                                                                Cancel
+                                                            </button>
+                                                        </div>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <p>{comment.content}</p>
+
+                                                        {user &&
+                                                            Number(comment.user_id) === Number(user.id) && (
+                                                                <div className="comment-manage-actions">
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() =>
+                                                                            startEditingComment(comment)
+                                                                        }
+                                                                    >
+                                                                        Edit
+                                                                    </button>
+
+                                                                    <button
+                                                                        type="button"
+                                                                        onClick={() =>
+                                                                            handleDeleteComment(
+                                                                                post.id,
+                                                                                comment.id
+                                                                            )
+                                                                        }
+                                                                    >
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
+                                                            )}
+                                                    </>
+                                                )}
                                             </div>
                                         ))}
 
