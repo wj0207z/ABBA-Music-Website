@@ -8,6 +8,12 @@ function Navbar() {
         JSON.parse(localStorage.getItem("user"))
     );
 
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    function closeMenu() {
+        setMenuOpen(false);
+    }
+
     useEffect(() => {
         function updateUser() {
             setUser(JSON.parse(localStorage.getItem("user")));
@@ -40,10 +46,28 @@ function Navbar() {
                     <span>ABBA</span>
                 </Link>
 
-                <div className="nav-links">
-                    <Link to="/">Home</Link>
-                    <Link to="/albums">Albums</Link>
-                    <Link to="/gallery">Gallery</Link>
+                <button
+                    className={`menu-toggle ${menuOpen ? "menu-toggle-open" : ""}`}
+                    type="button"
+                    aria-label="Toggle navigation menu"
+                    aria-expanded={menuOpen}
+                    onClick={() => setMenuOpen((current) => !current)}
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <div className={`nav-links ${menuOpen ? "mobile-menu-open" : ""}`}>
+                    <Link to="/" onClick={closeMenu}>
+                        Home
+                    </Link>
+                    <Link to="/albums" onClick={closeMenu}>
+                        Albums
+                    </Link>
+                    <Link to="/gallery" onClick={closeMenu}>
+                        Gallery
+                    </Link>
 
                     <div className="nav-dropdown">
                         <span className="nav-dropdown-label">
