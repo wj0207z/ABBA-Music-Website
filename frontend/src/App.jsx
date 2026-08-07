@@ -2,6 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import AlbumDetail from "./pages/AlbumDetail";
 import Albums from "./pages/Albums";
+import ChatRoom from "./pages/ChatRoom";
+import ChatRoomDetail from "./pages/ChatRoomDetail";
 import Community from "./pages/Community";
 import Gallery from "./pages/Gallery";
 import Home from "./pages/Home";
@@ -28,6 +30,9 @@ function App() {
                 />
                 <Route path="/my-posts" element={<MyPosts />} />
                 <Route path="/profile" element={<Profile />} />
+
+                <Route path="/chatroom" element={<ChatRoom />}/>
+                <Route path="/chatroom/:id" element={<ChatRoomDetail />} />
             </Routes>
         </>
     );

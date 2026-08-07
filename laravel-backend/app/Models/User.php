@@ -16,6 +16,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar',
     ];
 
     protected $hidden = [
@@ -40,9 +41,22 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
-    
+
     public function postLikes(): HasMany
     {
         return $this->hasMany(PostLike::class);
+    }
+
+    public function rooms(): HasMany
+    {
+        return $this->hasMany(
+            Room::class,
+            'created_by'
+        );
+    }
+
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Message::class);
     }
 }

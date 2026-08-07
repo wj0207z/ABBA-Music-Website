@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -90,20 +91,80 @@ class AuthController extends Controller
                 'max:255',
                 'unique:users,email,' . $user->id,
             ],
+            'avatar' => [
+                'nullable',
+                'image',
+                'mimes:jpg,jpeg,png,webp',
+                'max:2048',
+            ],
         ]);
 
-        $user->update([
+        $updateData = [
             'name' => $validated['name'],
             'email' => $validated['email'],
+        ];
+
+        if ($request->hasFile('avatar')) {
+            if ($user->avatar) {
+                Storage::disk('public')->delete(
+                    $user->avatar
+                    );
+            }
+
+            $updateData['avatar'] = $request
+                ->file('avatar')
+                ->store('avatars', 'public');
+        }
+
+        $user->update($updateData);
+
+        $updatedUser = $user->fresh()->loadCount([
+            'posts',
+            'comments',
+            'postLikes as likes_count',
         ]);
 
         return response()->json([
             'message' => 'Profile updated successfully.',
-            'user' => $user->fresh()->loadCount([
-                'posts',
-                'comments',
-                'postLikes as likes_count',
-            ]),
+            'user' => $updatedUser,
+        ]);
+    }
+
+    public function updatePassword(
+        Request $request
+    ): JsonResponse {
+        $validated = $request->validate([
+            'current_password' => [
+                'required',
+                'string',
+            ],
+            'password' => [
+                'required',
+                'string',
+                'min:8',
+                'confirmed',
+            ],
+        ]);
+
+        $user = $request->user();
+
+        if (!Hash::check(
+            $validated['current_password'],
+            $user->password
+        )) {
+            return response()->json([
+                'message' => 'Current password is incorrect.',
+            ], 422);
+        }
+
+        $user->update([
+            'password' => Hash::make(
+                $validated['password']
+            ),
+        ]);
+
+        return response()->json([
+            'message' => 'Password updated successfully.',
         ]);
     }
 

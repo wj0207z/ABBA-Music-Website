@@ -5,6 +5,7 @@ import App from "./App";
 
 import "./styles/albums.css";
 import "./styles/auth.css";
+import "./styles/chatroom.css";
 import "./styles/community.css";
 import "./styles/gallery.css";
 import "./styles/global.css";

@@ -188,7 +188,119 @@
     padding-top: 4px;
     color: #a9c9a9;
     font-size: 13px;
-}=
+}
+
+.profile-avatar-large {
+    overflow: hidden;
+}
+
+.profile-avatar-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.selected-file {
+    margin: 4px 0;
+    color: #aaa;
+    font-size: 12px;
+}
+
+.password-section {
+    width: min(100%, 650px);
+    margin: 24px auto 0;
+    padding: 30px;
+    border: 1px solid #3d3034;
+    background: #121212;
+}
+
+.password-section .eyebrow {
+    margin: 0 0 10px;
+    color: #c7a6ae;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.password-section h2 {
+    margin: 0 0 24px;
+    color: #fff;
+    font-size: 24px;
+}
+
+.password-form {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.password-form label {
+    color: #ccc;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.password-form input {
+    margin-bottom: 10px;
+    padding: 11px 13px;
+    border: 1px solid #4a3d40;
+    background: #0b0b0b;
+    color: #fff;
+    font: inherit;
+}
+
+.password-form input:focus {
+    outline: none;
+    border-color: #c7a6ae;
+}
+
+.password-form button {
+    width: fit-content;
+    margin-top: 10px;
+    padding: 10px 16px;
+    border: 1px solid #c7a6ae;
+    background: transparent;
+    color: #c7a6ae;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.password-form button:hover {
+    background: #c7a6ae;
+    color: #111;
+}
+
+.password-form button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.password-section .profile-success {
+    margin: 0 0 18px;
+    padding: 0;
+}
+
+.password-section .error {
+    margin: 0 0 18px;
+    color: #d99a9a;
+}
+
+.profile-header .password-section {
+    width: 100%;
+    margin: 32px 0 0;
+    padding: 24px 0 0;
+    border-top: 1px solid #3d3034;
+    background: transparent;
+    text-align: left;
+}
+
+
+@media (max-width: 600px) {
+    .password-section {
+        padding: 24px 20px;
+    }
+}
 
 @media (max-width: 600px) {
     .profile-page {

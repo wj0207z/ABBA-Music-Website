@@ -5,6 +5,8 @@ use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\MessageController;
 
 Route::get('/health', function () {
     return response()->json([
@@ -33,9 +35,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy']);
 
     Route::get('/me', [AuthController::class, 'me']);
-    Route::put('/me', [AuthController::class, 'updateMe']
-);
+    Route::put('/me', [AuthController::class, 'updateMe']);
+
+    Route::put('/me/password', [AuthController::class, 'updatePassword']);
+
+    Route::get('/rooms', [RoomController::class, 'index']);
+    Route::post('/rooms', [RoomController::class, 'store']);
+    Route::get('/rooms/{room}', [RoomController::class, 'show']);
+
+    Route::get('/rooms/{room}/messages', [MessageController::class,'index',]);
+    Route::post('/rooms/{room}/messages', [MessageController::class,'store',]);
 });
 
-Route::get('/posts/{post}/comments', [CommentController::class, 'index']
-);
+Route::get('/posts/{post}/comments', [CommentController::class, 'index']);
