@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import MusicPlayer from "./components/MusicPlayer";
 import Navbar from "./components/Navbar";
 import AlbumDetail from "./pages/AlbumDetail";
 import Albums from "./pages/Albums";
@@ -34,6 +35,8 @@ function App() {
                 <Route path="/chatroom" element={<ChatRoom />}/>
                 <Route path="/chatroom/:id" element={<ChatRoomDetail />} />
             </Routes>
+
+            <MusicPlayer />
         </>
     );
 }
