@@ -9,9 +9,10 @@ import Community from "./pages/Community";
 import Gallery from "./pages/Gallery";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import MyPosts from "./pages/MyPosts";
+import MyPosts from "./pages/myPosts";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
+
 
 function App() {
     return (
