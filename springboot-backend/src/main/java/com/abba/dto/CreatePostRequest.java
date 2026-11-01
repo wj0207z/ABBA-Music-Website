@@ -1,0 +1,14 @@
+package com.abba.dto;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+public record CreatePostRequest(
+    @NotBlank
+    @Size (max = 255)
+    String author,
+
+    @NotBlank
+    @Size (max = 2000)
+    String content
+) {}
