@@ -21,12 +21,19 @@ public class Post {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
+    @Column(name = "user_id")
+    private Long userId;
+
     protected Post() {
         // JPA requires a default constructor
     }
 
     public Long getId() {
         return id;
+    }
+
+    public Long getUserId() {
+        return userId;
     }
 
     public String getAuthor() {
@@ -37,7 +44,8 @@ public class Post {
         return content;
     }
 
-    public Post(String author, String content) {
+    public Post(Long userId, String author, String content) {
+        this.userId = userId;
         this.author = author;
         this.content = content;
     }

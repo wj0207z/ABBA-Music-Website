@@ -1,5 +1,6 @@
 package com.abba.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -47,8 +48,10 @@ public class PostController {
     @PostMapping("/api/posts")
     @ResponseStatus(HttpStatus.CREATED)
     public PostResponse createPost(
-        @Valid @RequestBody CreatePostRequest request) {
-        return postService.createPost(request);
+        @Valid @RequestBody CreatePostRequest request,
+        Principal principal
+    ) {
+        return postService.createPost(request, principal.getName());
     }
     
     @PutMapping("/api/posts/{id}")

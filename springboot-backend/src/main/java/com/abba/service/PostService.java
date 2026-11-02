@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,15 +13,22 @@ import com.abba.dto.CreatePostRequest;
 import com.abba.dto.PostResponse;
 import com.abba.dto.UpdatePostRequest;
 import com.abba.entity.Post;
+import com.abba.entity.User;
 import com.abba.repository.PostRepository;
+import com.abba.repository.UserRepository;
 
 @Service
 public class PostService {
 
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
 
-    public PostService(PostRepository postRepository) {
+    public PostService(
+        PostRepository postRepository,
+        UserRepository userRepository
+    ) {
         this.postRepository = postRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional(readOnly = true)
@@ -56,9 +64,18 @@ public class PostService {
     }
 
     @Transactional
-    public PostResponse createPost(CreatePostRequest request){
+    public PostResponse createPost(
+        CreatePostRequest request,
+        String authenticatedEmail
+    ){
+        User user = userRepository.findByEmail(authenticatedEmail)
+            .orElseThrow(() -> new BadCredentialsException(
+                "Account is no longer available"
+            ));
+
         Post post = new Post(
-            request.author(),
+            user.getId(),
+            user.getName(),
             request.content()
         );
 
