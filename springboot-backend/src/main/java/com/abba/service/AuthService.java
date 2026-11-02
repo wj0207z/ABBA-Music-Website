@@ -1,18 +1,19 @@
 package com.abba.service;
 
 import java.util.Locale;
+import java.util.Optional;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.abba.dto.LoginRequest;
 import com.abba.dto.RegisterRequest;
 import com.abba.dto.UserResponse;
 import com.abba.entity.User;
 import com.abba.exception.RegistrationConflictException;
 import com.abba.repository.UserRepository;
-
-import jakarta.transaction.Transactional;
 
 @Service
 public class AuthService {
@@ -65,4 +66,33 @@ public class AuthService {
         );
     }
 
+    @Transactional(readOnly = true)
+    public Optional<UserResponse> verifyCredentials(LoginRequest request) {
+        String email = request.email().toLowerCase(Locale.ROOT);
+
+        Optional<User> result = userRepository.findByEmail(email);
+
+        if (result.isEmpty()) {
+            return Optional.empty();
+        }
+
+        User user = result.get();
+
+        boolean passwordMatches = passwordEncoder.matches(
+            request.password(),
+            user.getPasswordHash()
+        );
+
+        if (!passwordMatches) {
+            return Optional.empty();
+        }
+
+        return Optional.of(
+            new UserResponse(
+                user.getId(),
+                user.getName(),
+                user.getEmail()
+            )
+        );
+    }
 }
