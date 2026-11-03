@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -38,5 +39,15 @@ public class ApiExceptionHandler {
         );
 
         return ResponseEntity.status(422).body(response);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<Map<String, String>> handleAccessDenied(
+        AccessDeniedException exception
+    ) {
+        return ResponseEntity.status(403).body(
+            Map.of(
+            "message", "You can only modify your own posts"
+        ));
     }
 }

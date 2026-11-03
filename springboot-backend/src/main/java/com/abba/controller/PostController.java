@@ -56,10 +56,11 @@ public class PostController {
     
     @PutMapping("/api/posts/{id}")
     public PostResponse updatePost(
-        @PathVariable Long id,
-        @Valid @RequestBody UpdatePostRequest request
+        @PathVariable("id") Long id,
+        @Valid @RequestBody UpdatePostRequest request,
+        Principal principal
     ) {
-        return postService.updatePost(id, request)
+        return postService.updatePost(id, request, principal.getName())
             .orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND,
                 "Post not found"
@@ -68,8 +69,10 @@ public class PostController {
 
     @DeleteMapping("/api/posts/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePost(@PathVariable Long id) {
-        boolean deleted = postService.deletePost(id);
+    public void deletePost(@PathVariable("id") Long id,
+    Principal principal
+    ) {
+        boolean deleted = postService.deletePost(id, principal.getName());
         
         if (!deleted) {
             throw new ResponseStatusException(

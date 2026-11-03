@@ -26,7 +26,9 @@ public class SecurityConfig {
                     HttpMethod.GET,
                     "/api/posts",
                     "/api/posts/*",
-                    "/api/health"
+                    "/api/health",
+                    "/api/posts",
+                    "/api/csrf"
                 ).permitAll()
 
                 .requestMatchers(
@@ -34,26 +36,31 @@ public class SecurityConfig {
                     "/api/register"
                 ).permitAll()
 
-                .requestMatchers(
-                    HttpMethod.POST,
-                    "/api/posts"
-                ).authenticated()
-
-                .requestMatchers(
-                    HttpMethod.PUT,
-                    "/api/posts/*"
-                ).denyAll()
-
-                .requestMatchers(
-                    HttpMethod.DELETE,
-                    "/api/posts/*"
-                ).denyAll()
-
                 .anyRequest().authenticated()
             )
+            .requestCache(cache -> cache.disable())
+            .exceptionHandling(exceptions -> exceptions
+                .authenticationEntryPoint((request, response, exception) -> {
+                    response.setStatus(401);
+                })
+            )
 
-            .formLogin(formLogin -> formLogin
-                .defaultSuccessUrl("/api/me", true)
+            .logout(logout -> logout
+                .logoutUrl("/api/logout")
+                .logoutSuccessHandler((request, response, authentication) -> {
+                    response.setStatus(204);
+                })
+            )
+
+            .formLogin(form -> form
+                .loginProcessingUrl("/api/login")
+                .usernameParameter("email")
+                .successHandler((request, response, authentication) -> {
+                    response.setStatus(204);
+                })
+                .failureHandler((request, response, exception) -> {
+                    response.setStatus(401);
+                })
                 .permitAll()
             );
 

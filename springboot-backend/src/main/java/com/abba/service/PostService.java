@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -91,12 +92,14 @@ public class PostService {
     @Transactional
     public Optional<PostResponse> updatePost(
         Long id,
-        UpdatePostRequest request
+        UpdatePostRequest request,
+        String authenticatedEmail
     ) {
         return postRepository.findById(id)
             .map(post -> {
-                post.updateContent(request.content());
+                requireOwner(post, authenticatedEmail);
 
+                post.updateContent(request.content());
                 Post savedPost = postRepository.save(post);
 
                 return new PostResponse(
@@ -109,14 +112,31 @@ public class PostService {
     }
 
     @Transactional
-    public boolean deletePost(Long id) {
+    public boolean deletePost(Long id, String authenticatedEmail) {
         Optional<Post> result = postRepository.findById(id);
 
         if (result.isEmpty()) {
             return false;
-        } 
-        
-        postRepository.delete(result.get());
+        }
+
+        Post post = result.get();
+
+        requireOwner(post, authenticatedEmail);
+
+        postRepository.delete(post);
         return true;
+    }
+
+    private void requireOwner(Post post, String authenticatedEmail) {
+        User user = userRepository.findByEmail(authenticatedEmail)
+            .orElseThrow(() -> new BadCredentialsException(
+                "Account is no longer available"
+            ));
+
+        if (!user.getId().equals(post.getUserId())) {
+            throw new AccessDeniedException(
+                "You can only modify your own posts"
+            );
+        }
     }
 }
