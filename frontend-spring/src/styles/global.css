@@ -1,0 +1,61 @@
+@import url("https://fonts.cdnfonts.com/css/lulo-clean");
+@import url("https://fonts.googleapis.com/css?family=Fraunces");
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.eyebrow {
+    margin: 0 0 15px;
+    color: #cfb6bc;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+
+.error {
+    color: #e8a5a5;
+}
+
+.back-link {
+    display: inline-block;
+    color: #cfb6bc;
+    font-weight: bold;
+}
+
+.back-link:hover {
+    color: #fff;
+}
+
+.api-status {
+    margin: 30px 0;
+    color: #cfb6bc;
+    font-size: 14px;
+    text-align: center;
+}

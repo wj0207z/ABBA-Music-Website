@@ -1,0 +1,129 @@
+.auth-page {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 140px 24px 60px;
+    background: #000;
+}
+
+.auth-card {
+    width: min(100%, 440px);
+    padding: 42px;
+    background: #121212;
+    border: 1px solid #3d3034;
+    color: #f4f1f2;
+}
+
+.auth-card .eyebrow {
+    margin: 0 0 16px;
+    color: #fff;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.auth-card h1 {
+    margin: 0 0 32px;
+    color: #e1c5cb;
+    font-family: Arial, sans-serif;
+    font-size: 44px;
+    font-weight: 600;
+}
+
+.auth-card form {
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-card label {
+    margin-bottom: 8px;
+    color: #e5e0e1;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.auth-card input {
+    width: 100%;
+    margin-bottom: 22px;
+    padding: 14px 15px;
+    border: 1px solid #454045;
+    outline: none;
+    background: #0b0b0b;
+    color: #fff;
+    font: inherit;
+    font-size: 14px;
+}
+
+.auth-card input:focus {
+    border-color: #c7a6ae;
+}
+
+.auth-card button {
+    width: 100%;
+    margin-top: 8px;
+    padding: 14px 18px;
+    border: 1px solid #c7a6ae;
+    background: #c7a6ae;
+    color: #111;
+    cursor: pointer;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.auth-card button:hover {
+    background: #e1c5cb;
+    border-color: #e1c5cb;
+}
+
+.auth-card button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+.auth-card .error {
+    margin-bottom: 20px;
+    padding: 12px 14px;
+    border-left: 2px solid #b87878;
+    background: #24191b;
+    color: #dda4a4;
+}
+
+.auth-switch {
+    margin: 26px 0 0;
+    color: #999294;
+    font-size: 15px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+.auth-card a,
+.auth-switch a {
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.auth-card a:hover,
+.auth-switch a:hover {
+    color: #c7a6ae;
+}
+
+@media (max-width: 600px) {
+    .auth-page {
+        padding: 125px 18px 50px;
+    }
+
+    .auth-card {
+        width: 100%;
+        padding: 32px 25px;
+    }
+
+    .auth-card h1 {
+        font-size: 38px;
+    }
+}

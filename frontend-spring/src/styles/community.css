@@ -1,0 +1,591 @@
+.community-page {
+    min-height: 100vh;
+    padding: 160px 8vw 100px;
+    background-color: #000;
+}
+
+.community-heading {
+    max-width: 700px;
+    margin: 0 auto 55px;
+    text-align: center;
+}
+
+.community-heading h1 {
+    margin: 0;
+    color: #cfb6bc;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 65px;
+    letter-spacing: 6px;
+}
+
+.community-heading > p:not(.eyebrow) {
+    color: #fff;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+.community-layout {
+    display: grid;
+    grid-template-columns: 280px minmax(400px, 700px);
+    justify-content: center;
+    gap: 25px;
+}
+
+.profile-card {
+    height: fit-content;
+    padding: 24px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #101010;
+    text-align: center;
+}
+
+.profile-avatar {
+    display: grid;
+    place-items: center;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background-color: #cfb6bc;
+    color: #101010;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.profile-card h2 {
+    margin: 0 0 6px;
+    color: #101010;
+}
+
+.username {
+    margin: 0;
+    color: #777;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-between;
+    margin: 28px 0;
+}
+
+.profile-stats strong,
+.profile-stats span {
+    display: block;
+}
+
+.profile-stats strong {
+    color: #9f777f;
+    font-size: 20px;
+}
+
+.profile-stats span {
+    margin-top: 5px;
+    color: #101010;
+    font-size: 11px;
+}
+
+.profile-button {
+    padding: 10px 15px;
+    border: 1px solid #9f777f;
+    background-color: transparent;
+    color: #9f777f;
+}
+
+.profile-button:hover {
+    background-color: #9f777f;
+    color: #fff;
+}
+
+.post-list {
+    padding: 25px;
+    background-color: #fff;
+}
+
+.post-form {
+    margin-bottom: 24px;
+    padding: 20px;
+    background: #f3f3f3;
+}
+
+.post-form textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 14px;
+    border: 1px solid #ddd;
+    resize: vertical;
+    font: inherit;
+}
+
+.post-form button {
+    margin-top: 12px;
+    padding: 10px 22px;
+    border: 0;
+    background: #cfb6bc;
+    color: #000;
+    font-weight: 600;
+}
+
+.post-form button:hover {
+    background: #000;
+    color: #cfb6bc;
+}
+
+.community-post {
+    margin-bottom: 20px;
+    padding: 24px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    color: #101010;
+}
+
+.post-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.post-header strong {
+    color: #101010;
+}
+
+.post-header span {
+    color: #777;
+    font-size: 12px;
+}
+
+.community-post > p {
+    color: #101010;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.post-actions {
+    display: flex;
+    gap: 18px;
+    margin-top: 18px;
+}
+
+.post-action {
+    border: 0;
+    background: transparent;
+    color: #9f777f;
+}
+
+.post-action:hover,
+.post-action.liked {
+    color: #101010;
+}
+
+.my-posts-list {
+    width: min(100%, 760px);
+    margin: 0 auto;
+    padding: 24px;
+    background: #fff;
+}
+
+.my-posts-list .community-post {
+    margin-bottom: 16px;
+    padding: 22px;
+    border: 1px solid #dedede;
+    background: #fafafa;
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.my-posts-list .community-post:hover {
+    border-color: #c7a6ae;
+    transform: translateY(-2px);
+}
+
+.my-posts-list .community-post:last-child {
+    margin-bottom: 0;
+}
+
+.my-posts-list .post-header {
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.my-posts-list .post-header strong {
+    color: #222;
+    font-size: 15px;
+}
+
+.my-posts-list .post-header span {
+    color: #888;
+    font-size: 12px;
+}
+
+.my-posts-list .community-post > p {
+    margin: 18px 0;
+    color: #222;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.back-to-community {
+    width: min(100%, 760px);
+    margin: 22px auto 0;
+    text-align: center;
+}
+
+.back-to-community a {
+    color: #c7a6ae;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.back-to-community a:hover {
+    color: #fff;
+}
+
+.edit-post-input {
+    width: 100%;
+    min-height: 110px;
+    margin-top: 18px;
+    padding: 14px;
+    border: 1px solid #c7a6ae;
+    background: #fff;
+    color: #222;
+    font: inherit;
+    resize: vertical;
+}
+
+.post-manage-action {
+    padding: 8px 14px;
+    border: 1px solid #9f777f;
+    background: transparent;
+    color: #9f777f;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.post-manage-action:hover {
+    background: #9f777f;
+    color: #fff;
+}
+
+.post-manage-action:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.delete-post-action {
+    border-color: #a45f5f;
+    color: #a45f5f;
+}
+
+.delete-post-action:hover {
+    background: #a45f5f;
+    color: #fff;
+}
+
+.my-posts-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #ddd;
+}
+
+.history-label {
+    margin: 0 0 8px;
+    color: #9f777f;
+    font-family: "Lulo Clean One", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.my-posts-toolbar h2 {
+    margin: 0;
+    color: #222;
+    font-size: 25px;
+}
+
+.select-post-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    border: 1px solid #9f777f;
+    background: transparent;
+    color: #9f777f;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.select-post-button:hover {
+    background: #9f777f;
+    color: #fff;
+}
+
+.selection-toolbar {
+    margin-bottom: 20px;
+    padding: 16px;
+    background: #f3f3f3;
+}
+
+.selection-toolbar p {
+    margin: 0 0 14px;
+    color: #555;
+    font-size: 14px;
+}
+
+.selection-toolbar button {
+    margin-right: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.manage-selected-button {
+    border: 1px solid #9f777f;
+    background: #9f777f;
+    color: #fff;
+}
+
+.delete-selected-button {
+    border: 1px solid #a45f5f;
+    background: transparent;
+    color: #a45f5f;
+}
+
+.cancel-selection-button {
+    border: 1px solid #aaa;
+    background: transparent;
+    color: #555;
+}
+
+.selection-toolbar button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+}
+
+.selected-post {
+    border: 2px solid #9f777f !important;
+}
+
+.post-selector {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: auto;
+    color: #9f777f;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.post-selector input {
+    accent-color: #9f777f;
+}
+
+/* Comments */
+
+.comments-section {
+    margin-top: 22px;
+    padding-top: 18px;
+    border-top: 1px solid #e1e1e1;
+}
+
+.comments-section > p {
+    margin: 0 0 14px;
+    color: #777;
+    font-size: 14px;
+}
+
+.comment-item {
+    margin-bottom: 12px;
+    padding: 13px 15px;
+    border-left: 3px solid #c7a6ae;
+    background: #f5f5f5;
+}
+
+.comment-item strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #222;
+    font-size: 14px;
+}
+
+.comment-item span {
+    display: block;
+    margin-bottom: 8px;
+    color: #888;
+    font-size: 11px;
+}
+
+.comment-item p {
+    margin: 0;
+    color: #333;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.comment-form {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.comment-form textarea {
+    flex: 1;
+    min-height: 45px;
+    padding: 11px 13px;
+    border: 1px solid #d4d4d4;
+    background: #fff;
+    color: #222;
+    font: inherit;
+    resize: vertical;
+}
+
+.comment-form textarea:focus {
+    outline: none;
+    border-color: #9f777f;
+}
+
+.comment-form button {
+    align-self: flex-start;
+    padding: 11px 16px;
+    border: 1px solid #9f777f;
+    background: #9f777f;
+    color: #fff;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.comment-form button:hover {
+    background: #000;
+    border-color: #000;
+    color: #cfb6bc;
+}
+
+.comments-section .error {
+    margin: 10px 0;
+    color: #a45f5f;
+    font-size: 13px;
+}
+
+.comment-edit-input {
+    width: 100%;
+    min-height: 70px;
+    margin-top: 8px;
+    padding: 10px 12px;
+    border: 1px solid #c7a6ae;
+    background: #fff;
+    color: #222;
+    font: inherit;
+    resize: vertical;
+}
+
+.comment-edit-input:focus {
+    outline: none;
+    border-color: #9f777f;
+}
+
+.comment-manage-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.comment-manage-actions button {
+    padding: 6px 11px;
+    border: 1px solid #9f777f;
+    background: transparent;
+    color: #9f777f;
+    cursor: pointer;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.comment-manage-actions button:hover {
+    background: #9f777f;
+    color: #fff;
+}
+
+.comment-manage-actions button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.comment-manage-actions button:last-child {
+    border-color: #a45f5f;
+    color: #a45f5f;
+}
+
+.comment-manage-actions button:last-child:hover {
+    background: #a45f5f;
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    .comment-form {
+        flex-direction: column;
+    }
+
+    .comment-form button {
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 600px) {
+    .my-posts-toolbar {
+        align-items: flex-start;
+    }
+
+    .selection-toolbar button {
+        margin-bottom: 8px;
+    }
+}
+
+@media (max-width: 800px) {
+    .community-page {
+        padding: 110px 25px 70px;
+    }
+
+    .community-heading h1 {
+        font-size: 45px;
+    }
+
+    .community-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .post-list {
+        padding: 15px;
+
+    }
+
+    .my-posts-list {
+        width: 100%;
+        padding: 16px;
+    }
+
+    .my-posts-list .community-post {
+        padding: 18px;
+    }
+
+    .my-posts-list .community-post > p {
+        font-size: 16px;
+    }
+    
+}

@@ -95,4 +95,14 @@ public class AuthService {
             )
         );
     }
+
+    @Transactional(readOnly = true)
+    public Optional<UserResponse> getCurrentUser(String email) {
+        return userRepository.findByEmail(email)
+            .map(user -> new UserResponse(
+                user.getId(),
+                user.getName(),
+                user.getEmail()
+            ));
+    }
 }

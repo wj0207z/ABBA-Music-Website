@@ -3,7 +3,6 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 
-import { SpringAuthProvider } from "./context/SpringAuthContext";
 import "./styles/albums.css";
 import "./styles/auth.css";
 import "./styles/chatroom.css";
@@ -22,9 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
         <BrowserRouter>
             <MusicProvider>
-                <SpringAuthProvider>
-                    <App />
-                </SpringAuthProvider>
+                <App />
             </MusicProvider>
         </BrowserRouter>
     </React.StrictMode>

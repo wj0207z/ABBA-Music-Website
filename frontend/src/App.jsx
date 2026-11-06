@@ -9,11 +9,9 @@ import Community from "./pages/Community";
 import Gallery from "./pages/Gallery";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import MyPosts from "./pages/myPosts";
+import MyPosts from "./pages/MyPosts";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
-import SpringLogin from "./pages/SpringLogin";
-import SpringPosts from "./pages/SpringPosts";
 
 
 function App() {
@@ -28,6 +26,7 @@ function App() {
                 <Route path="/albums" element={<Albums />} />
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/community" element={<Community />} />
+
                 <Route
                     path="/albums/:slug"
                     element={<AlbumDetail />}
@@ -37,8 +36,6 @@ function App() {
 
                 <Route path="/chatroom" element={<ChatRoom />}/>
                 <Route path="/chatroom/:id" element={<ChatRoomDetail />} />
-                <Route path="/spring-posts" element={<SpringPosts />} />
-                <Route path="/spring-login" element={<SpringLogin />} />
             </Routes>
 
             <MusicPlayer />
